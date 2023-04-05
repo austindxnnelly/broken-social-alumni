@@ -15,6 +15,7 @@ public class HelloHomeTest {
 
 	@Test
 	public void testHelloWorld(){
+		assertEquals(greeter.sayHello(), "Hello New Zealand!");
 	}
 
 
