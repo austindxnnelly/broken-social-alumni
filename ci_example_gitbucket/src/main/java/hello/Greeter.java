@@ -9,6 +9,6 @@ public class Greeter {
 	 * Make sure to create a password for your Zoom room
 	 */
 	public String sayHelloZoom() {
-		return "Hello World via Google meet!";
+		return "Hello World via Zoom!";
 	}
 }
