@@ -18,11 +18,11 @@ public class HelloHomeTest {
 
 	@Test
 	public void testHelloWorld(){
-		assertEquals(greeter.sayHello(), is("Hello New Zealand!"));
+		assertThat(greeter.sayHello(), is("Hello New Zealand!"));
 	}
 
 	@Test 
 	public void testSayHelloZoom() {
-		assertEquals(greeter.sayHelloZoom(), is("Hello World via Zoom!"));
+		assertThat(greeter.sayHelloZoom(), is("Hello World via Zoom!"));
 	}
 }
