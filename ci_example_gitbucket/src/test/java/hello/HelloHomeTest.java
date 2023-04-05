@@ -1,8 +1,8 @@
 package hello;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-import java.beans.Transient;
 
 import org.junit.Test;
 import org.junit.Before;
