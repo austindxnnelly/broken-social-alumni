@@ -36,6 +36,8 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -71,4 +73,12 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+    console.log(`Server is live http://localhost:${PORT}`);
+});
+
 module.exports = app;
+
+
