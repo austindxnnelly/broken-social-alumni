@@ -8,7 +8,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-const student = require('./models/user_schema');
+const student = require('./models/student_schema');
 
 /* load .env*/
 dotenv.config();
