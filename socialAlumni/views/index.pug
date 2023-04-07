@@ -6,3 +6,13 @@ block content
   //So the title is stored under the index.js page in the get home page router method 
   h1= title 
   p Welcome to #{title} Networking for Otago Students and Alumni
+  p(class=h1Classes) Please sign in: 
+  p If you do not have an account with us, you can create one below. 
+  label(for="inputEmail") Email 
+  input(type="email" id="inputEmail")
+  p
+  label(for="inputPassword") Password 
+  input(type="password" id="inputPassword")
+  p
+  button Sign In 
+  button Create Account
