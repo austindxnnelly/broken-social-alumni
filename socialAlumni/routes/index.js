@@ -11,7 +11,9 @@ router.get('/signIn', function(req, res) {
   res.render('sign-in', {title: 'Sign In' });
 });
 
-
+router.get('/create', (req, res) => {
+  res.render('create', {title: "Create Account"});
+});
 
 
 module.exports = router;
