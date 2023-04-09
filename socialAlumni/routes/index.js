@@ -15,5 +15,10 @@ router.get('/create', (req, res) => {
   res.render('create', {title: "Create Account"});
 });
 
+router.get('/nav', (req, res) => {
+  const isAuthenticated = req.isAuthenticated();
+  res.render('nav', { isAuthenticated });
+});
+
 
 module.exports = router;

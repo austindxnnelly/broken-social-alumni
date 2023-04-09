@@ -1,7 +1,14 @@
-if user
-  nav
-    ul
+nav
+  ul
+    li
+      a(href='/') Home
+    if isAuthenticated
       li
-        a(href='/') Home
-else
-  // Show nothing
+        a(href='/profile') Profile
+      li
+        a(href='/logout') Logout
+    else
+      li
+        a(href='/login') Login
+      li
+        a(href='/signup') Sign up
