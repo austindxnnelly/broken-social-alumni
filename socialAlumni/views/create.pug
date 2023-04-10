@@ -2,7 +2,26 @@ extends layout
 
 block content
   title Home
-  navmenu
+  include nav
   //So the title is stored under the index.js page in the get home page router method 
   h1= title 
-  p Welcome to #{title} Networking for Otago Students and Alumni
+  p #{title} below. 
+  label(for="inputFirstName") First Name 
+  input(type="text" id="inputFirstName")
+  p
+  label(for="inputLastName") Last Name 
+  input(type="text" id="inputLastName")
+  p
+  label(for="inputEmail") Email 
+  input(type="email" id="inputEmail")
+  p
+  label(for="inputPassword") Password 
+  input(type="password" id="inputPassword")
+  p
+  label(for="inputDegree") Degree 
+  input(type="text" id="inputDegree")
+  p
+  label(for="inputGraduateYear") Graduate Year 
+  input(type="text" id="inputGraduateYear")
+  p
+  a(class='button' href='/create') Create Account
