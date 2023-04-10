@@ -7,8 +7,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Social Alumni' });
 });
 
-router.get('/signIn', function(req, res) {
-  res.render('sign-in', {title: 'Sign In' });
+router.get('/signin', (req, res) => {
+  res.render('signin', {title: 'Sign In' });
 });
 
 router.get('/create', (req, res) => {

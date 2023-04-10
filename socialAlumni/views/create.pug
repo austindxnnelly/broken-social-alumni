@@ -2,9 +2,8 @@ extends layout
 
 block content
   title Home
-  include nav
-  //So the title is stored under the index.js page in the get home page router method 
   h1= title 
+  include nav
   p #{title} below. 
   label(for="inputFirstName") First Name 
   input(type="text" id="inputFirstName")
