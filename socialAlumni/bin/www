@@ -88,3 +88,45 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+/**
+ * 
+ */
+var bodyParser = require('body-parser')
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}))
+/**
+ * Gets all messages from the database
+ */
+app.get('/messages', (req, res) => {
+  Message.find({},(err, messages)=> {
+    res.send(messages);
+  })
+})
+/**
+ * Post new messages to the database
+ */
+app.post('/messages', (req, res) => {
+  var message = new Message(req.body);
+  message.save((err) =>{
+    if(err)
+      sendStatus(500);
+    res.sendStatus(200);
+  })
+})
+
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+io.on('connection', () =>{
+  console.log('a user is connected')
+ })
+
+ app.post('/messages', (req, res) => {
+  var message = new Message(req.body);
+  message.save((err) =>{
+    if(err)
+      sendStatus(500);
+    io.emit('message', req.body);
+    res.sendStatus(200);
+  })
+})
