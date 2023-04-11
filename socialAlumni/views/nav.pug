@@ -1,16 +1,16 @@
 nav
   ul
     li
-      a(href='/') Home
+      a(href='/home/') Home
     if isAuthenticated
       li
-        a(href='/profile') Profile
+        a(href='/home/profile') Profile
       li
-        a(href='/logout') Logout
+        a(href='/home/logout') Logout
     else
       li
-        a(href='/signin') Login
+        a(href='/home/signin') Login
       li
-        a(href='/create') Sign up
+        a(href='/home/create') Sign up
       li 
-        a(href='/message') Message
+        a(href='/home/message') Message

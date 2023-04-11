@@ -1,26 +1,41 @@
-extends layout
-
-block content
+doctype html
+html
+  head
+    title= title
+    //-link(rel='stylesheet', href='/stylesheets/style.css')
+  body
   title Home
   h1= title 
   include nav
-  p #{title} below. 
-  label(for="inputFirstName") First Name 
-  input(type="text" id="inputFirstName")
-  p
-  label(for="inputLastName") Last Name 
-  input(type="text" id="inputLastName")
-  p
-  label(for="inputEmail") Email 
-  input(type="email" id="inputEmail")
-  p
-  label(for="inputPassword") Password 
-  input(type="password" id="inputPassword")
-  p
-  label(for="inputDegree") Degree 
-  input(type="text" id="inputDegree")
-  p
-  label(for="inputGraduateYear") Graduate Year 
-  input(type="text" id="inputGraduateYear")
-  p
-  a(class='button' href='/create') Create Account
+  p #{title}
+
+main
+  p #{errors}
+    div 
+      form(action='/home/create', method='post')
+        fieldset
+          legend User Information
+          label(for="inputFirstName") First Name 
+          input(type="text", id="inputFirstName", name='inputFirstName')
+          label(for="inputLastName") Last Name 
+          input(type="text", id="inputLastName", name='inputLastName')
+          label(for="inputUsername") Username
+          input(type="text", id="inputUsername", name='inputUsername')
+          label(for="inputEmail") Email 
+          input(type="email", id="inputEmail", name='inputEmail')
+          label(for="inputPassword") Password 
+          input(type="password", id="inputPassword", name='inputPassword')
+          label(for="inputPhone") Phone
+          input(type="number", id="inputPhone", name='inputPhone')
+        
+        button(type='submit') Create Account
+ 
+  //-p
+  //-label(for="inputDegree") Degree 
+  //-input(type="text" id="inputDegree" name="inputDegree")
+  
+  //-p
+  //-label(for="inputGraduateYear") Graduate Year 
+  //-input(type="text" id="inputGraduateYear" name="inputGraduateYear") 
+  //-p
+  //-a(class='button' href='/create') Create Account

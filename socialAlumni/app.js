@@ -2,13 +2,16 @@ const dotenv = require('dotenv');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+//var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+//var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-const student = require('./models/student_schema');
+//const student = require('./models/student_schema');
+//const client = require('./models/user_schema');
+//const alumni = require('./models/alumni_schema');
 
 /* load .env*/
 dotenv.config();
@@ -36,20 +39,47 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(bodyParser.urlencoded({ extended: true }));
 
+//app.use(express.json());
+//app.use(express.urlencoded({ extended: false }));
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+//app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.get('/', (req,res) => {
+  res.redirect('/home/')
+})
+app.use('/home/', indexRouter);
 app.use('/users', usersRouter);
 //app.use()
 
+/*let id;
 
-//testing database connection
+const c = new user_json ({
+  password: '111',
+  first_name: 'Tara',
+  last_name: 'Glennie',
+  email: 'taraglennie@hotmail.com',
+  phone_number: Number('0221705979')
+}
+);
+
+
+c.save();
+
+id = c.id;
+console.log(id);*/
+
+/*const a = new alumni ({
+  user: id,
+  degree: 'csci',
+  current_job: 'network',
+  year_graduated: '2023'
+});
+
+a.save();*/
+
 /*const stud = new student ({
   first_name: 'Tara',
   last_name: 'Glennie',
