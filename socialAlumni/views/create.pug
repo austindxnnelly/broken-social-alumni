@@ -1,15 +1,12 @@
-doctype html
-html
-  head
-    title= title
-    //-link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+extends layout
+
+block content
   title Home
   h1= title 
   include nav
   p #{title}
 
-main
+  main
   p #{errors}
     div 
       form(action='/home/create', method='post')
@@ -17,14 +14,19 @@ main
           legend User Information
           label(for="inputFirstName") First Name 
           input(type="text", id="inputFirstName", name='inputFirstName')
+          br
           label(for="inputLastName") Last Name 
           input(type="text", id="inputLastName", name='inputLastName')
+          br
           label(for="inputUsername") Username
           input(type="text", id="inputUsername", name='inputUsername')
+          br
           label(for="inputEmail") Email 
           input(type="email", id="inputEmail", name='inputEmail')
+          br
           label(for="inputPassword") Password 
           input(type="password", id="inputPassword", name='inputPassword')
+          br
           label(for="inputPhone") Phone
           input(type="number", id="inputPhone", name='inputPhone')
         

@@ -18,6 +18,37 @@ router.get('/signin', (req, res) => {
   res.render('signin', {title: 'Sign In' });
 });
 
+router.post('/signin', 
+  body("inputEmail", "Please enter a valid email").isLength({min: 1}),
+  body("inputPassword", "Please enter a valid password").isLength({min: 1}),
+
+  async (req, res) => {
+    const user_doc = {
+      email: req.body.inputEmail,
+      password: req.body.inputPassword,
+    };
+
+  const result= validationResult(req);
+  var errors = result.errors;
+
+  if (errors.length !== 0) {
+    res.render('signin', {errors: errors[0].msg})
+  } else {
+    try {
+      const user = await user_json.findOne(user_doc)
+      if (!user) {
+        res.render('signin', {errors: 'Incorrect username/password'})
+      } else {
+          res.render('index', {isAuthenticated: true})
+        }
+      } catch (error) {
+        res.render('signin', {errors: 'An error occured'})
+    }
+  } 
+});
+
+
+
 router.get('/create', (req, res) => {
   res.render('create', {title: "Create Account"});
 });

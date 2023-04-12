@@ -8,12 +8,18 @@ block content
   p Welcome to #{title} Networking for Otago Students and Alumni
   p(class=h1Classes) Please sign in: 
   p If you do not have an account with us, you can create one below. 
-  label(for="inputEmail") Email 
-  input(type="email" id="inputEmail")
-  p
-  label(for="inputPassword") Password 
-  input(type="password" id="inputPassword")
-  p
-  a(class='button' href='/signin') Sign In
+
+  main
+  p #{errors}
+    div 
+      form(action='/home/signin', method='post')
+        fieldset
+          legend User Information
+          label(for="inputEmail") Email 
+          input(type="email" id="inputEmail" name="inputEmail")
+          label(for="inputPassword") Password 
+          input(type="password" id="inputPassword" name="inputPassword")
+          
+        button(type='submit') Sign In
   p
   a(class='button' href='/create') Create Account
