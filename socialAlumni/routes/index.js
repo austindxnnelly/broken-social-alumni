@@ -26,21 +26,36 @@ router.get('/create', (req, res) => {
 router.post('/create', 
   body("inputFirstName", "Please enter valid first name").isLength({min: 1}),
   body("inputLastName", "Please enter valid last name").isLength({min: 1}),
-  body("inputUsername", "Please fill enter valid username").isLength({min: 1}),
-  body("inputEmail", "Please enter valid email").isLength({min: 1}),
+  body("inputUsername", "Please fill enter valid username").isLength({min: 1}).custom(value => {
+    return user_json.find({
+      username: value
+    }). then(user => {
+      if (user.length > 0){
+        return Promise.reject('Username already in use');
+      }
+    });
+  }),
+  body("inputEmail", "Please enter valid email").isLength({min: 1}).custom(value => {
+    return user_json.find({
+      email: value
+    }). then(user => {
+      if (user.length > 0){
+        return Promise.reject('Email already in use');
+      }
+    });
+  }),
   body("inputPassword", "Please fill enter valid password").isLength({min: 1}),
   body("inputPhone", "Please enter valid phone number").isLength({min: 1}),
 
 async (req, res) => {
   const user_doc = {
+    username: req.body.inputUsername,
     first_name: req.body.inputFirstName,
     last_name: req.body.inputLastName,
     password: req.body.inputPassword,
     email: req.body.inputEmail,
     phone_number: req.body.inputPhone,
   };
-
-  console.log(user_doc);
 
   const result= validationResult(req);
   var errors = result.errors;
