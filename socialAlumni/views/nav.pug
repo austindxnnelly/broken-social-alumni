@@ -3,10 +3,14 @@ nav
     if isAuthenticated
       li
         a(href='/home/profile') Profile
-      li
-        a(href='/home/logout') Logout
       li 
         a(href='/home/message') Message
+      li 
+        a(href='/home/group') Groups
+      li 
+        a(href='/home/feed') Feed
+      li
+        a(href='/home/logout') Logout
     else
       li
         a(href='/home/') Home
