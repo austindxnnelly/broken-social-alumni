@@ -116,5 +116,9 @@ router.get('/nav', (req, res) => {
   res.render('nav', { isAuthenticated });
 });
 
+router.get('/logout', (req, res) => {
+  const isAuthenticated = false; 
+  res.redirect('/');
+})
 
 module.exports = router;
