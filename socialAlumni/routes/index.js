@@ -39,7 +39,8 @@ router.post('/signin',
       if (!user) {
         res.render('signin', {errors: 'Incorrect username/password'})
       } else {
-          res.render('index', {isAuthenticated: true})
+          res.render('profile', {isAuthenticated: true})
+          res.redirect('/profile');
         }
       } catch (error) {
         res.render('signin', {errors: 'An error occured'})
