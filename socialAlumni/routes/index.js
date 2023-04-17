@@ -39,7 +39,8 @@ router.post('/signin',
       if (!user) {
         res.render('signin', {errors: 'Incorrect username/password'})
       } else {
-          res.render('index', {isAuthenticated: true})
+          res.render('profile', {isAuthenticated: true})
+          res.redirect('/profile');
         }
       } catch (error) {
         res.render('signin', {errors: 'An error occured'})
@@ -116,5 +117,24 @@ router.get('/nav', (req, res) => {
   res.render('nav', { isAuthenticated });
 });
 
+/*router.get('/logout', (req, res) => {
+  const isAuthenticated = false; 
+  res.redirect('/');
+})*/
+
+router.get('/profile', (req, res) => {
+  res.render('profile', {title: "User Profile"});
+});
+
+router.post('/profile', async (req, res) => {
+  try {
+    const user = await user_json.findOne(user_doc);
+    const fname = user.first_name;
+    const lname = user.last_name;
+    res.render('profile', {isAuthenticated: true, firstName:fname, lastName:lname});
+    } catch (error) {
+      res.render('profile', {errors: 'An error occured'})
+  }
+})
 
 module.exports = router;
