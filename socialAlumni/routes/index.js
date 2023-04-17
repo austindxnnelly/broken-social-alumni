@@ -125,4 +125,15 @@ router.get('/profile', (req, res) => {
   res.render('profile', {title: "User Profile"});
 });
 
+router.post('/profile', async (req, res) => {
+  try {
+    const user = await user_json.findOne(user_doc);
+    const fname = user.first_name;
+    const lname = user.last_name;
+    res.render('profile', {isAuthenticated: true, firstName:fname, lastName:lname});
+    } catch (error) {
+      res.render('profile', {errors: 'An error occured'})
+  }
+})
+
 module.exports = router;
