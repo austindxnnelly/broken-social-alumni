@@ -109,21 +109,24 @@ async (req, res) => {
 
 
 router.get('/message', (req, res) => {
-  res.render('message', {title: "Message"});
+  res.render('message', {isAuthenticated: true, title: "Message"});
 });
 
 router.get('/nav', (req, res) => {
-  const isAuthenticated = req.isAuthenticated();
-  res.render('nav', { isAuthenticated });
+  if (user) {
+    const isAuthenticated = req.isAuthenticated();
+    res.render('nav', { isAuthenticated });
+  } else {
+    res.render('nav')
+  }
 });
 
-/*router.get('/logout', (req, res) => {
-  const isAuthenticated = false; 
-  res.redirect('/');
-})*/
+router.get('/logout', (req, res) => {
+  res.render('index', {isAuthenticated: false})
+});
 
 router.get('/profile', (req, res) => {
-  res.render('profile', {title: "User Profile"});
+  res.render('profile', {isAuthenticated: true, title: "User Profile"});
 });
 
 router.post('/profile', async (req, res) => {
