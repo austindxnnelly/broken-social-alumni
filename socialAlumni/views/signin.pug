@@ -1,25 +1,22 @@
 extends layout
 
 block content
-  title Home
-  //So the title is stored under the index.js page in the get home page router method 
-  h1= title 
   include nav 
-  p Welcome to #{title} Networking for Otago Students and Alumni
+  body
   p(class=h1Classes) Please sign in: 
   p If you do not have an account with us, you can create one below. 
 
   main
   p #{errors}
+  form(class='form-signin', action='/home/signin', method='post')
     div 
-      form(action='/home/signin', method='post')
         fieldset
           legend User Information
           label(for="inputEmail") Email 
-          input(type="email" id="inputEmail" name="inputEmail")
+          input(type="email" id="inputEmail" name="inputEmail", class="form-control")
+          div
           label(for="inputPassword") Password 
-          input(type="password" id="inputPassword" name="inputPassword")
-          
-        button(type='submit') Sign In
+          input(type="password" id="inputPassword" name="inputPassword", class="form-control")
+          button(type='submit') Sign In
   p
   a(class='button' href='/create') Create Account
