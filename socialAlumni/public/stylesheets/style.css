@@ -96,3 +96,23 @@ button {
 .form-signin button {
   margin-left: 118px;
 }
+
+.column-profile {
+  float: left;
+  width: 33.33%;
+}
+
+/* Clear floats after the columns */
+.row-profile:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row-profile {
+  margin-bottom: 20px;
+}
+
+.column-profile {
+  text-align: left;
+}

@@ -5,13 +5,35 @@ block content
     h1= title
     include nav 
     p 
-    table.table 
-        tr= fname
-        br
-        tr= lname
-        br 
-        tr Field of Study 
-        br 
-        tr Year Graduated
-        br 
-    br
+    div(class='row-profile')
+        legend Profile Settings
+        div(class='column-profile')
+           form(class="form-profile", method='get')
+           fieldset
+                label(for="userPicture") Picture here 
+                div
+                label(for="userFirstName") Name 
+                div
+                label(for="userEmail") Email 
+        div(class='column-profile')
+            form(class="form-profile", method='get')
+                fieldset 
+                    label(for="userFirstName") Name 
+                    div
+                    input(type="name" id="userFirstName" name="userFirstName", class="form-control")
+                    div
+                    label(for="userSurname") Surname 
+                    div
+                    input(type="name" id="userSurname" name="userSurname", class="form-control")
+                    div
+        div(class='column-profile')
+            form(class="form-profile", method='get')
+                fieldset
+                    label(for="userStatus") Years Active 
+                    div
+                    input(type="status" id="userStatus" name="userStatus", class="form-control")
+                    div
+                    label(for="fieldOfStudy") Field of Study 
+                    div
+                    input(type="field" id="fieldOfStudy" name="fieldOfStudy", class="form-control")
+                    div
