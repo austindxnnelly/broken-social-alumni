@@ -145,3 +145,7 @@ module.exports = router;
 router.get('/feed', (req, res) => {
   res.render('feed', {isAuthenticated: true, title: "Timeline"});
 });
+
+router.get('/groups', (req, res) => {
+  res.render('groups', {isAuthenticated: true, title: "Groups"});
+});
