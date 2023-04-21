@@ -141,3 +141,7 @@ router.post('/profile', async (req, res) => {
 })
 
 module.exports = router;
+
+router.get('/feed', (req, res) => {
+  res.render('feed', {isAuthenticated: true, title: "Timeline"});
+});
