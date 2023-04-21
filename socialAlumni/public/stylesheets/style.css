@@ -70,7 +70,10 @@ button {
   padding: 10px;
   font-size: 16px;
 }
+
 .form-signin .form-control:focus {
+  box-shadow: none;
+  border-color:#00B7FF;
   z-index: 2;
 }
 
@@ -91,6 +94,7 @@ button {
 
 .form-signin legend {
   text-align: center;
+  margin-bottom: 15px;
 }
 
 .form-signin button {
@@ -98,6 +102,7 @@ button {
 }
 
 .column-profile {
+  margin-top: 15px;
   float: left;
   width: 33.33%;
 }
@@ -115,4 +120,9 @@ button {
 
 .column-profile {
   text-align: left;
+}
+
+.column-message {
+  float: left;
+  width: 50%;
 }

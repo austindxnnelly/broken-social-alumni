@@ -5,16 +5,18 @@ block content
     include nav 
     p Send a message 
     p 
-    label(for="inputFirstName") First Name 
-    input(type="text" id="name")
-    p
-    p 
-    label(for="inputRecepient") Recepient
-    input(type="text" id="recepient") 
-    label(for="inputMessage") Message 
-    input(type="text" id="message")
-    p
-    a(class='button' href='/message') Send message 
+    div(class="column-message")
+        label(for="inputFirstName") First Name 
+        input(type="text" id="name")
+        p
+        p 
+        label(for="inputRecepient") Recepient
+        input(type="text" id="recepient") 
+    div(class="column-message")
+        label(for="inputMessage") Message 
+        input(type="text" id="message")
+        p
+        a(class='button' href='/message') Send message 
     script.
         $(() => {
             $("#send").click(()=>{
