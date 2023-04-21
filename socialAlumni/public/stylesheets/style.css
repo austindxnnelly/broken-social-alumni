@@ -11,7 +11,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 17px;
   background-color: #333;
   color: #fff;
 }
@@ -105,6 +105,7 @@ button {
   margin-top: 15px;
   float: left;
   width: 33.33%;
+  font-size: 16px;
 }
 
 /* Clear floats after the columns */
@@ -125,4 +126,8 @@ button {
 .column-message {
   float: left;
   width: 50%;
+}
+
+legend {
+  font-size: 20px;
 }
