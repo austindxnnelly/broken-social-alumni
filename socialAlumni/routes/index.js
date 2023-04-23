@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Social Alumni' });
 });
 
-router.get('/signin', (req, res) => {
+/*router.get('/signin', (req, res) => {
   res.render('signin', {title: 'Sign In' });
 });
 
@@ -103,7 +103,7 @@ async (req, res) => {
     res.redirect('/');
 }
 
-});
+});*/
 
 
 
