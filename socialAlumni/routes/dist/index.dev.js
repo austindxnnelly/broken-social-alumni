@@ -1,20 +1,27 @@
+"use strict";
+
 var express = require('express');
-const { req } = require('express');
-const { body, validationResult } = require('express-validator');
 
+var _require = require('express'),
+    req = _require.req;
 
-const user_json = require('../models/user_schema');
-const alumni_json = require('../models/alumni_schema');
+var _require2 = require('express-validator'),
+    body = _require2.body,
+    validationResult = _require2.validationResult;
 
+var user_json = require('../models/user_schema');
 
-const router = express.Router();
+var alumni_json = require('../models/alumni_schema');
 
+var router = express.Router();
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Social Alumni' });
-  console.log(req.user)
-});
 
+router.get('/', function (req, res, next) {
+  res.render('index', {
+    title: 'Social Alumni'
+  });
+  console.log(req.user);
+});
 /*router.get('/signin', (req, res) => {
   res.render('signin', {title: 'Sign In' });
 });
@@ -106,66 +113,102 @@ async (req, res) => {
 
 });*/
 
-
-
-
-router.get('/message', (req, res) => {
-  res.render('message', {isAuthenticated: true, title: "Message"});
+router.get('/message', function (req, res) {
+  res.render('message', {
+    isAuthenticated: true,
+    title: "Message"
+  });
 });
-
-router.get('/nav', (req, res) => {
+router.get('/nav', function (req, res) {
   if (user) {
-    const isAuthenticated = req.isAuthenticated();
-    res.render('nav', { isAuthenticated });
+    var isAuthenticated = req.isAuthenticated();
+    res.render('nav', {
+      isAuthenticated: isAuthenticated
+    });
   } else {
-    res.render('nav')
+    res.render('nav');
   }
 });
+router.post('/logout', function (req, res) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
 
-router.post('/logout', function(req, res){
-  req.logout(function(err) {
-    if (err) { return next(err); }
     res.redirect('/');
   });
-  });
+});
+router.get('/logout', function (req, res) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
 
-router.get('/logout', function(req, res){
-  req.logout(function(err) {
-    if (err) { return next(err); }
     res.redirect('/home/signin');
   });
-  });
+});
 
-
-var auth = function (req, res, next) {
-  if (req.isAuthenticated())
-    return next();
+var auth = function auth(req, res, next) {
+  if (req.isAuthenticated()) return next();
   res.status(401).json("not authenticated!");
-}
+};
 
-router.get('/profile', auth, (req, res) => {
-  res.render('profile', {isAuthenticated: true, title: "User Profile", lastname: req.user.first_name});
+router.get('/profile', auth, function (req, res) {
+  res.render('profile', {
+    isAuthenticated: true,
+    title: "User Profile",
+    lastname: req.user.first_name
+  });
   console.log(req.user);
   console.log(req.session.passport.user);
 });
+router.post('/profile', function _callee(req, res) {
+  var _user, fname, lname;
 
-router.post('/profile', async (req, res) => {
-  try {
-    const user = await user_json.findOne(user_doc);
-    const fname = user.first_name;
-    const lname = user.last_name;
-    res.render('profile', {isAuthenticated: true, firstName:fname, lastName:lname});
-    } catch (error) {
-      res.render('profile', {errors: 'An error occured'})
-  }
-})
+  return regeneratorRuntime.async(function _callee$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          _context.next = 3;
+          return regeneratorRuntime.awrap(user_json.findOne(user_doc));
 
-module.exports = router;
+        case 3:
+          _user = _context.sent;
+          fname = _user.first_name;
+          lname = _user.last_name;
+          res.render('profile', {
+            isAuthenticated: true,
+            firstName: fname,
+            lastName: lname
+          });
+          _context.next = 12;
+          break;
 
-router.get('/feed', (req, res) => {
-  res.render('feed', {isAuthenticated: true, title: "Timeline"});
+        case 9:
+          _context.prev = 9;
+          _context.t0 = _context["catch"](0);
+          res.render('profile', {
+            errors: 'An error occured'
+          });
+
+        case 12:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, [[0, 9]]);
 });
-
-router.get('/groups', (req, res) => {
-  res.render('groups', {isAuthenticated: true, title: "Groups"});
+module.exports = router;
+router.get('/feed', function (req, res) {
+  res.render('feed', {
+    isAuthenticated: true,
+    title: "Timeline"
+  });
+});
+router.get('/groups', function (req, res) {
+  res.render('groups', {
+    isAuthenticated: true,
+    title: "Groups"
+  });
 });

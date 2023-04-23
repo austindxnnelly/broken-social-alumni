@@ -44,10 +44,20 @@ router.get('/create', (req, res) => {
 })
 
 router.get('/signin', (req, res) => {
+  if (req.isAuthenticated()) {
+  
+    /* If request is already authenticated, 
+    i.e. user has already logged in and 
+    there is no need to login again. */
+    console.log("SIGNED IN");
+}
+else {
   res.render('signin', { title: 'Sign In' })
+  console.log("NOTE SIGNED IN ")
+}
 })
 
-router.post('/signin', function (req, res) {
+/*router.post('/signin', function (req, res) {
   if (!req.body.email) {
     res.json({ success: false, message: 'Username was not given' })
   } else if (!req.body.password) {
@@ -72,12 +82,18 @@ router.post('/signin', function (req, res) {
             success: true,
             message: 'Authentication successful',
             token: token
-          });*/
-          res.render('profile', {isAuthenticated: true})
+          });
+          res.redirect('/home/profile')
         }
       }
     })(req, res)
   }
-})
+}) */
+router.post ('/signin', passport.authenticate( 'local', {
+successRedirect: '/home/profile',
+failureRedirect: 'home/signin'}
+));
+
+
 
 module.exports = router
