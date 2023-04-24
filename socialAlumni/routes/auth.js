@@ -89,11 +89,23 @@ else {
     })(req, res)
   }
 }) */
-router.post ('/signin', passport.authenticate( 'local', {
-successRedirect: '/home/profile',
-failureRedirect: 'home/signin'}
-));
+router.post ('/signin', function(req, res, next) {
+  passport.authenticate( 'local', function(err, user) {
+    if (err) {
+      return next(err)
+    }
 
+    if (!user) {
+      return res.render('signin', {errors: "Incorrect Username or Password"})
+    }
 
+    req.logIn(user, function(err) {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect('/home/profile');
+    });
+  })(req, res, next);
+});
 
 module.exports = router
