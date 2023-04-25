@@ -98,6 +98,7 @@ app.get('/messages', (req, res) => {
     res.send(messages);
   })
 })
+
 /**
  * Post new messages to the database
  */
