@@ -144,7 +144,7 @@ var auth = function (req, res, next) {
 }
 
 router.get('/profile', auth, (req, res) => {
-  res.render('profile', {isAuthenticated: true, title: "User Profile", lastname: req.user.first_name});
+  res.render('profile', {isAuthenticated: true, title: "User Profile", lastname: req.user.last_name, firstname: req.user.first_name});
   console.log(req.user);
   console.log(req.session.passport.user);
 });

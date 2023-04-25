@@ -18,9 +18,9 @@ block content
         div(class='column-profile')
             form(class="form-profile", method='get')
                 fieldset 
-                    label(for="userFirstName") Name 
+                    label(for="userFirstName") First Name 
                     div
-                    input(type="name" id="userFirstName" name="userFirstName", class="form-control")
+                    p #{firstname}
                     div
                     label(for="userSurname") Surname 
                     p #{lastname}
@@ -43,3 +43,4 @@ block content
                     div
                     input(type="field" id="fieldOfStudy" name="fieldOfStudy", class="form-control")
                     div
+                    input(type="submit", value="Save")
