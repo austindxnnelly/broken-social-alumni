@@ -27,9 +27,9 @@ router.post('/create', async (req, res) => {
     
     var errors = error;
     if (errors.length !== 0) {
-        res.render('create', {errors: errors.message})
+        res.render('create', {title: 'Create Account', errors: errors.message})
       } else {
-        res.render('create', {errors: "An error occured"})
+        res.render('create', { title: 'Create Account', errors: "An error occured"})
       }
   }
 })
@@ -91,7 +91,7 @@ router.post ('/signin', function(req, res, next) {
     }
 
     if (!user) {
-      return res.render('signin', {errors: "Incorrect Username or Password"})
+      return res.render('signin', {title: "Sign In", errors: "Incorrect Username or Password"})
     }
 
     req.logIn(user, function(err) {

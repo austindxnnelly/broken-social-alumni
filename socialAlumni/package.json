@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
-    "test": "node_modules/mocha/bin/mocha.js 'test/*.spec.js'"      
+    "test": "node_modules/mocha/bin/mocha.js 'test/*.spec.js'"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
@@ -18,6 +18,7 @@
     "express-validator": "^6.15.0",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^9.0.0",
+    "mocha": "^10.2.0",
     "mongoose": "^7.0.3",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.22",
@@ -27,7 +28,6 @@
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {
-    "chai": "^4.3.4",
-    "mocha": "^10.2.0"
+    "chai": "^4.3.4"
   }
 }

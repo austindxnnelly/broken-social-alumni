@@ -5,7 +5,7 @@ var search_controller = require('../controllers/search_controller');
 
 const user_json = require('../models/user_schema');
 const alumni_json = require('../models/alumni_schema');
-const user_schema = require('../models/user');
+//const user_s = require('../models/user');
 
 
 const router = express.Router();
@@ -17,18 +17,18 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/search', async(req, res) => {
-  let users = await user_schema.find({});
+  let users = await user_json.find({});
   let search = req.query.search;
 
   res.render('search' , {
-    usersearch: search_controller.filter_users(search, users)
+    usersearch: search_controller.filter_users(search, users), isAuthenticated: true
   });
 })
 
 
 
 router.get('/message', (req, res) => {
-  res.render('message', {isAuthenticated: true, title: "Message"});
+
 });
 
 router.get('/nav', (req, res) => {
