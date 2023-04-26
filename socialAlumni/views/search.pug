@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    title Search
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    h1 Search
+    include nav 
+    main
+        each user in usersearch
+            include templates/user_results.pug

@@ -1,0 +1,18 @@
+section
+    div(class='column-profile')
+        form(class="form-profile", method='get')
+            fieldset 
+                div
+                label(for="userFirstName") First Name: 
+                div
+                label(for="firstName") #{user.first_name}
+                div
+                label(for="userSurname") Surname: 
+                div
+                label(for="lastName")  #{user.last_name}
+                div
+                label(for="userEmail") Email: 
+                div
+                label(for="email") #{user.email}
+        a(href='/home/' + user.email + '/all-messages')
+            button Message User

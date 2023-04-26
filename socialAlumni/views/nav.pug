@@ -18,3 +18,8 @@ nav
         a(href='/home/signin') Login
       li
         a(href='/home/create') Sign up
+  if isAuthenticated
+    form(action='/home/search', method='get')
+      label(for='search') Search
+      input(type='text' name='search' id='search' placeholder="search...")
+      button(type='submit')
