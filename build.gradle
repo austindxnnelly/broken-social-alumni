@@ -21,21 +21,21 @@ dependencies {
     implementation 'org.slf4j:slf4j-api:2.0.0-alpha5'
     implementation 'org.slf4j:slf4j-simple:2.0.0-alpha5'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
-    implementation 'com.mongodb:mongodb-driver-sync:4.2.3'
+
     implementation 'com.typesafe:config:1.4.1'
     implementation 'javax.servlet:javax.servlet-api:4.0.1'
     implementation 'org.eclipse.jetty:jetty-servlet:11.0.2'
     implementation 'org.eclipse.jetty:jetty-servlets:11.0.2'
     implementation 'org.eclipse.jetty:jetty-webapp:11.0.2'
-    implementation 'org.eclipse.jetty:jetty-jsp:11.0.2'
+
     implementation 'org.eclipse.jetty:jetty-annotations:11.0.2'
     implementation 'org.eclipse.jetty:jetty-plus:11.0.2'
-    implementation 'org.eclipse.jetty.websocket:websocket-server:11.0.2'
+
     implementation 'org.eclipse.jetty.websocket:websocket-servlet:11.0.2'
     implementation 'org.eclipse.jetty.websocket:javax-websocket-server-impl:9.4.32.v20200930'
     implementation 'org.eclipse.jetty.websocket:javax-websocket-client-impl:9.4.32.v20200930'
-    implementation 'org.eclipse.jetty.websocket:websocket-common:11.0.2'
-    implementation 'org.eclipse.jetty.websocket:websocket-api:11.0.2'
+
+
 }
 
 
