@@ -53,8 +53,11 @@ tasks {
 }
 test {
   useMocha {
-    colors true
-    reporter = 'spec'
-    include '**/*Spec.js'
-  }
+        testClassesDir = sourceSets.test.output.classesDir
+        classpath = sourceSets.test.runtimeClasspath
+        options {
+            reporter = "spec"
+            timeout = "10000"
+        }
+    }
 }
