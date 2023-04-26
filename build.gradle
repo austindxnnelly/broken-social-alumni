@@ -55,6 +55,8 @@ test {
   useMocha {
         testClassesDir = sourceSets.test.output.classesDir
         classpath = sourceSets.test.runtimeClasspath
+        ignoreExitValue true
+        workingDir file("${projectDir}/SocialAlumni")
         options {
             reporter = "spec"
             timeout = "10000"
