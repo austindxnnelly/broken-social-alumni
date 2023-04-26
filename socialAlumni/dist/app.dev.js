@@ -19,7 +19,9 @@ var bodyParser = require('body-parser'); //var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 
-var authRouter = require('./routes/auth'); //const student = require('./models/student_schema');
+var authRouter = require('./routes/auth');
+
+var messageRouter = require('./routes/message'); //const student = require('./models/student_schema');
 //const client = require('./models/user_schema');
 //const alumni = require('./models/alumni_schema');
 
@@ -66,6 +68,7 @@ app.get('/', function (req, res) {
 });
 app.use('/home/', indexRouter);
 app.use('/home/', authRouter);
+app.use('/home/', messageRouter);
 app.use(bodyParser.json());
 
 var UserM = require('./models/user');

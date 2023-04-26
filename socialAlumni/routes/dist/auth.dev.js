@@ -37,18 +37,7 @@ router.post('/create', function _callee(req, res) {
           return regeneratorRuntime.awrap(User.register(user, req.body.password));
 
         case 4:
-          req.login(user, function (err) {
-            if (err) {
-              res.json({
-                success: false,
-                message: err
-              });
-            }
-
-            return res.redirect('/home/');
-          });
-          _context.next = 11;
-          break;
+          return _context.abrupt("return", res.redirect('/home/signin'));
 
         case 7:
           _context.prev = 7;
@@ -123,8 +112,25 @@ router.get('/signin', function (req, res) {
   }
 }) */
 
-router.post('/signin', passport.authenticate('local', {
-  successRedirect: '/home/profile',
-  failureRedirect: 'home/signin'
-}));
+router.post('/signin', function (req, res, next) {
+  passport.authenticate('local', function (err, user) {
+    if (err) {
+      return next(err);
+    }
+
+    if (!user) {
+      return res.render('signin', {
+        errors: "Incorrect Username or Password"
+      });
+    }
+
+    req.logIn(user, function (err) {
+      if (err) {
+        return next(err);
+      }
+
+      return res.redirect('/home/profile');
+    });
+  })(req, res, next);
+});
 module.exports = router;

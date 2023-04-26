@@ -160,7 +160,7 @@ router.get('/profile', auth, function (req, res) {
     lastname: req.user.first_name
   });
   console.log(req.user);
-  console.log(req.session.passport.user);
+  console.log(req.session.passport.id);
 });
 router.post('/profile', function _callee(req, res) {
   var _user, fname, lname;
@@ -200,13 +200,14 @@ router.post('/profile', function _callee(req, res) {
   }, null, null, [[0, 9]]);
 });
 module.exports = router;
-router.get('/feed', function (req, res) {
+router.get('/feed', auth, function (req, res) {
   res.render('feed', {
     isAuthenticated: true,
     title: "Timeline"
   });
+  console.log(req.user._id);
 });
-router.get('/groups', function (req, res) {
+router.get('/groups', auth, function (req, res) {
   res.render('groups', {
     isAuthenticated: true,
     title: "Groups"

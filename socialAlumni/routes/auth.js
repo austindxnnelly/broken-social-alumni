@@ -22,7 +22,7 @@ router.post('/create', async (req, res) => {
       phone_number: req.body.inputPhone
     })
     await User.register(user, req.body.password)
-    return res.redirect('/home/')
+    return res.redirect('/home/signin')
   } catch (error) {
     
     var errors = error;
