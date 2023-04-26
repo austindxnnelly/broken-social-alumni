@@ -12,9 +12,13 @@ block content
            fieldset
                 label(for="userPicture") Picture here 
                 div
-                label(for="userFirstName") Name 
+                label(for="userName") Name 
+                div
+                label #{firstname + " " + lastname}
                 div
                 label(for="userEmail") Email 
+                div
+                label #{email}
         div(class='column-profile')
             form(class="form-profile", method='get')
                 fieldset 
