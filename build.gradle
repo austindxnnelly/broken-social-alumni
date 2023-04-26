@@ -54,5 +54,7 @@ tasks {
 test {
   useMocha {
     colors true
+    reporter = 'spec'
+    include '**/*Spec.js'
   }
 }
