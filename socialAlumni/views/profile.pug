@@ -12,30 +12,23 @@ block content
            fieldset
                 label(for="userPicture") Picture here 
                 div
-                label(for="userName") Name 
-                div
                 label #{firstname + " " + lastname}
-                div
-                label(for="userEmail") Email 
-                div
-                label #{email}
         div(class='column-profile')
             form(class="form-profile", method='get')
                 fieldset 
                     label(for="userFirstName") First Name 
                     div
-                    p #{firstname}
+                    label(for="firstName")  #{firstname}
+                    p
                     div
                     label(for="userSurname") Surname 
-                    p #{lastname}
-                    div
-                    label(for="userFirstName") Name
                     div 
-                    input(type="name" id="userSurname" name="userSurname", class="form-control")
+                    label(for="lastName")  #{lastname}
                     div
-                    label(for="userFirstName") Name
-                    div 
-                    input(type="name" id="userSurname" name="userSurname", class="form-control")
+                    p 
+                    label(for="userEmail") Email 
+                    div
+                    label #{email}
         div(class='column-profile')
             form(class="form-profile", method='get')
                 fieldset
