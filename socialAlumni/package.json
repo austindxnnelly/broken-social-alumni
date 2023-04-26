@@ -4,7 +4,8 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "test": "node_modules/mocha/bin/mocha.js 'test/*.spec.js'"      
   },
   "dependencies": {
     "body-parser": "^1.20.2",
@@ -24,5 +25,9 @@
     "passport-local-mongoose": "^8.0.0",
     "passport-local-mongoose-email": "^0.1.4",
     "pug": "2.0.0-beta11"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^10.2.0"
   }
 }
