@@ -87,3 +87,24 @@ router.get('/feed', (req, res) => {
 router.get('/groups', (req, res) => {
   res.render('groups', {isAuthenticated: true, title: "Groups"});
 });
+
+router.post('/profile', async (req, res) => {
+  try {
+    const user = await user_json.findOne(user_doc);
+    const fname = user.first_name;
+    const lname = user.last_name;
+    res.render('profile', {isAuthenticated: true, firstName:fname, lastName:lname});
+    
+    // save uploaded profile picture
+    const profilePicture = req.files.profilePictures;
+    profilePicture.mv('public/profilePictures/', (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log('Profile picture saved!');
+      }
+    });
+  } catch (error) {
+      res.render('profile', {errors: 'An error occured'})
+  }
+})

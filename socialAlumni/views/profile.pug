@@ -8,9 +8,13 @@ block content
     div(class='row-profile')
         legend Profile Settings
         div(class='column-profile')
-           form(class="form-profile", method='get')
-           fieldset
-                label(for="userPicture") Picture here 
+           form(class="form-profile", method='post', enctype='multipart/form-data')
+                fieldset
+                label(for="userPicture") Profile Picture
+                div
+                input(type="file" name="profilePicture" accept="image/*")
+                p
+                input(type="submit", value="Upload")
                 div
                 label #{firstname + " " + lastname}
         div(class='column-profile')
