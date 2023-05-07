@@ -72,11 +72,36 @@ router.post('/profile', async (req, res) => {
     const user = await user_json.findOne(user_doc);
     const fname = user.first_name;
     const lname = user.last_name;
-    res.render('profile', {isAuthenticated: true, firstName:fname, lastName:lname});
-    } catch (error) {
-      res.render('profile', {errors: 'An error occured'})
+    
+    // Handle file upload
+    const profilePicture = req.files.profilePictures;
+    const filename = 'profile-' + Date.now() + '-' + profilePicture.name;
+    profilePicture.mv('public/profilePictures/' + filename, (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log('Profile picture saved!');
+      }
+    });
+    
+    // Update user's profile picture in the database
+    user.profile_picture = filename;
+    await user.save();
+    
+    // Render the profile page with the updated profile picture
+    res.render('profile', {
+      isAuthenticated: true,
+      title: "User Profile",
+      firstname: fname,
+      lastname: lname,
+      email: user.email,
+      profilePictures: filename
+    });
+  } catch (error) {
+    res.render('profile', {errors: 'An error occurred'})
   }
-})
+});
+
 
 module.exports = router;
 
@@ -87,24 +112,3 @@ router.get('/feed', (req, res) => {
 router.get('/groups', (req, res) => {
   res.render('groups', {isAuthenticated: true, title: "Groups"});
 });
-
-router.post('/profile', async (req, res) => {
-  try {
-    const user = await user_json.findOne(user_doc);
-    const fname = user.first_name;
-    const lname = user.last_name;
-    res.render('profile', {isAuthenticated: true, firstName:fname, lastName:lname});
-    
-    // save uploaded profile picture
-    const profilePicture = req.files.profilePictures;
-    profilePicture.mv('public/profilePictures/', (err) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log('Profile picture saved!');
-      }
-    });
-  } catch (error) {
-      res.render('profile', {errors: 'An error occured'})
-  }
-})

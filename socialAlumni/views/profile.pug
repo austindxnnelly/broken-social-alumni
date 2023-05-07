@@ -10,13 +10,15 @@ block content
         div(class='column-profile')
            form(class="form-profile", method='post', enctype='multipart/form-data')
                 fieldset
-                label(for="userPicture") Profile Picture
+                label(for="profilePictures") Profile Picture
                 div
-                input(type="file" name="profilePicture" accept="image/*")
+                input(type="file" name="profilePictures", id= "profilePictures", accept="image/*")
                 p
                 input(type="submit", value="Upload")
                 div
                 label #{firstname + " " + lastname}
+                 if profilePictures 
+                img(src=`/profilePictures/${profilePictures}`, alt="Profile pictures")
         div(class='column-profile')
             form(class="form-profile", method='get')
                 fieldset 
