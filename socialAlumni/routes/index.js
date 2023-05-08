@@ -96,62 +96,6 @@ router.get('/profile', auth, (req, res) => {
   }
 });*/
 
-router.get('/feed', (req, res) => {
-  res.render('feed', {isAuthenticated: true, title: "Timeline"});
-});
-
-router.post('/feed', async (req, res) => {
-  // get the data from the request body 
-  const post_document = {
-      username_sent: req.user.email,
-      message_content: req.body.content,
-      date: new Date().getTime(),
-  };
-  let reciever = req.params.id
-
-  console.log(req);
-  
-  // insert the data into the database
-  const db_info = await PostDB.create(post_document);
-  
-  // print some stuff
-  console.log(db_info, '/user/create-message response');
-  
-  // tell the client it worked!
-  console.log('/' + reciever + '/all-messages');
-  res.redirect('/home/feed');
-})
-
-router.get('/:id/all-posts', async (req, res) => {
-  // query all the messages
-  const sender = req.user.email;
-  var postsSent = await PostDB.find({username_sent: sender});
-  for(let i = 0; i < postsSent.length; i++){
-      postsSent[i]["owner"] = true;
-  }
-
-  var userRecieved = await UserDB.findOne({email: sender});
-  var nameRecieved = userRecieved["first_name"];
-
-  console.log("USER: " + userRecieved);
-  console.log("NAME: " + nameRecieved);
-
-  const posts = postsSent;
-  var sort_func = (a, b) => a.date - b.date;
-  posts.sort(sort_func);
-
-
-
-  console.log(posts);
-
-  // respond to the client with the messages (as json)
-  res.render('post_layout',{
-      posts: posts,
-      user: userRecieved,
-      username: nameRecieved
-  });
-
-})
 
 
 module.exports = router;

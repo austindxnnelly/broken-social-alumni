@@ -15,10 +15,12 @@ var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var messageRouter = require('./routes/message');
 var imageRouter = require('./routes/image');
+var feedRouter = require('./routes/feed')
 
 //const student = require('./models/student_schema');
 //const client = require('./models/user_schema');
 //const alumni = require('./models/alumni_schema');
+const group = require('./models/group_schema');
 
 /* load .env*/
 dotenv.config();
@@ -75,6 +77,7 @@ app.use('/home/', indexRouter);
 app.use('/home/', authRouter);
 app.use('/home/', messageRouter);
 app.use('/images/', imageRouter);
+app.use('/home/', feedRouter);
 
 app.use(bodyParser.json());
 

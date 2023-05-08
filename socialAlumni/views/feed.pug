@@ -6,9 +6,9 @@ block content
 
     body
     form(action='/home/feed', method = 'post', id="post-form")
-    input(id="content" type="text" autocomplete="off" placeholder="Aa" name="content")
-    button(id="post-button" type="submit") Post
+        input(id="content" type="text" autocomplete="off" placeholder="Aa" name="content")
+        button(id="post-button" type="submit") Post
 
-     main
+    main
         each post in posts
-          include templates/feed_template.pug
+          include templates/post_template.pug
