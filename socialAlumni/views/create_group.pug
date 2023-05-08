@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    h1 title
+    include nav 
+    main
+      p #{errors}
+        div 
+            form(action='/home/create-group', method='post')
+                fieldset
+                    legend Group Information
+                    label(for="group_name") Name 
+                    input(type="text", id="group_name", name='group_name')
+                    br
+                    label(for="group_description") Description
+                    input(type="text", id="group_description", name='group_description')
+                    br
+                button(type='submit') Create Group  

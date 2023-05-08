@@ -69,40 +69,28 @@ router.get('/profile', auth, (req, res) => {
   console.log(req.session.passport.user);
 });
 
-/*router.post('/profile', async (req, res) => {
-  try {
-    const user = await user_json.findOne(user_doc);
-    const fname = user.first_name;
-    const lname = user.last_name;
-    
-    // Handle file upload
-    const profilePicture = req.files.profilePictures;
-    const filename = 'profile-' + Date.now() + '-' + profilePicture.name;
-    profilePicture.mv('public/profilePictures/' + filename, (err) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log('Profile picture saved!');
-      }
-    });
-    
-    // Update user's profile picture in the database
-    user.profile_picture = filename;
-    await user.save();
-    
-    // Render the profile page with the updated profile picture
-    res.redirect('/home/profile');
-  } catch (error) {
-    res.render('profile', {errors: 'An error occurred'})
-  }
-});*/
-
 
 
 router.get('/groups', async(req, res) => {
   let groups = await group_json.find({});
 
   res.render('groups', {groups : groups, isAuthenticated: true, title: "Groups"});
+});
+
+router.post('/create-group', async(req, res) => {
+  const group_document = {
+    name: req.body.group_name,
+    description: req.body.group_description,
+    members: req.user.email
+  }
+
+    const db_info = await group_json.create(group_document);
+    res.redirect('/home/groups');
+});
+
+
+router.get('/create-group', async(req, res) => {
+  res.render('create_group', {isAuthenticated: true, title: "Create Group"});
 });
 
 
