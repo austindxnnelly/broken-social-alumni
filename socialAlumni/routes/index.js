@@ -93,6 +93,15 @@ router.get('/create-group', async(req, res) => {
   res.render('create_group', {isAuthenticated: true, title: "Create Group"});
 });
 
+router.get('/:id/join', async(req, res) => {
+  let group = req.params.id
+// insert the data into the database
+const db_info = await group_json.findOneAndUpdate({name: group}, {$push: {members: req.user.email}});
+
+// tell the client it worked!
+res.redirect('/home/' + group + '/feed');
+});
+
 
 module.exports = router;
 
