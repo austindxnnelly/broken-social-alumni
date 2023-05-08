@@ -119,7 +119,7 @@ router.post('/feed', async (req, res) => {
   
   // tell the client it worked!
   console.log('/' + reciever + '/all-messages');
-  res.redirect('/feed');
+  res.redirect('/home/feed');
 })
 
 
