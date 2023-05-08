@@ -122,6 +122,37 @@ router.post('/feed', async (req, res) => {
   res.redirect('/home/feed');
 })
 
+router.get('/:id/all-posts', async (req, res) => {
+  // query all the messages
+  const sender = req.user.email;
+  var postsSent = await PostDB.find({username_sent: sender});
+  for(let i = 0; i < postsSent.length; i++){
+      postsSent[i]["owner"] = true;
+  }
+
+  var userRecieved = await UserDB.findOne({email: sender});
+  var nameRecieved = userRecieved["first_name"];
+
+  console.log("USER: " + userRecieved);
+  console.log("NAME: " + nameRecieved);
+
+  const posts = postsSent;
+  var sort_func = (a, b) => a.date - b.date;
+  posts.sort(sort_func);
+
+
+
+  console.log(posts);
+
+  // respond to the client with the messages (as json)
+  res.render('post_layout',{
+      posts: posts,
+      user: userRecieved,
+      username: nameRecieved
+  });
+
+})
+
 
 module.exports = router;
 
