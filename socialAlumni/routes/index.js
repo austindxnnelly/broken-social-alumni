@@ -5,6 +5,7 @@ var search_controller = require('../controllers/search_controller');
 
 const user_json = require('../models/user_schema');
 const alumni_json = require('../models/alumni_schema');
+const PostDB = require('../models/post_schema');
 //const user_s = require('../models/user');
 
 
@@ -94,6 +95,32 @@ router.get('/profile', auth, (req, res) => {
     res.render('profile', {errors: 'An error occurred'})
   }
 });*/
+
+router.get('/feed', (req, res) => {
+  res.render('feed', {isAuthenticated: true, title: "Timeline"});
+});
+
+router.post('/feed', async (req, res) => {
+  // get the data from the request body 
+  const post_document = {
+      username_sent: req.user.email,
+      message_content: req.body.content,
+      date: new Date().getTime(),
+  };
+  let reciever = req.params.id
+
+  console.log(req);
+  
+  // insert the data into the database
+  const db_info = await PostDB.create(post_document);
+  
+  // print some stuff
+  console.log(db_info, '/user/create-message response');
+  
+  // tell the client it worked!
+  console.log('/' + reciever + '/all-messages');
+  res.redirect('/feed');
+})
 
 
 module.exports = router;
