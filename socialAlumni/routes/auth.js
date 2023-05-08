@@ -19,10 +19,14 @@ router.post('/create', async (req, res) => {
       last_name: req.body.inputLastName,
       email: req.body.email,
       username: req.body.email,
-      phone_number: req.body.inputPhone
+      phone_number: req.body.inputPhone,
+      profile_photo: req.body.photo_source
+
     })
-    await User.register(user, req.body.password)
-    return res.redirect('/home/signin')
+
+    req.files.photo_upload.mv('./public/profilePictures/' + req.files.photo_upload.name);
+    await User.register(user, req.body.password);
+    return res.redirect('/home/signin');
   } catch (error) {
     
     var errors = error;

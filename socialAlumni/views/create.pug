@@ -9,7 +9,7 @@ block content
   main
   p #{errors}
     div 
-      form(action='/home/create', method='post')
+      form(action='/home/create', method='post', enctype="multipart/form-data")
         fieldset
           legend User Information
           label(for="inputFirstName") First Name 
@@ -29,6 +29,16 @@ block content
           br
           label(for="inputPhone") Phone
           input(type="number", id="inputPhone", name='inputPhone')
+        
+        fieldset 
+          legend Image
+          label(for='photo_upload') Upload Photo 
+          input(name='photo_upload', type='file', id="photo_upload")
+          label(for='photo_source') Photo Preview 
+          img(id="upload_preview", src='/images/')
+          input(id="upload_source" type="text" name="photo_source" readonly="readonly" value="default.jpg")
+
+
         
         button(type='submit') Create Account
  

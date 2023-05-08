@@ -6,12 +6,15 @@ var passport = require('passport');
 const session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
+
 
 //var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var messageRouter = require('./routes/message');
+var imageRouter = require('./routes/image');
 
 //const student = require('./models/student_schema');
 //const client = require('./models/user_schema');
@@ -45,6 +48,8 @@ app.set('view engine', 'pug');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(fileUpload());
+
 //app.use(express.json());
 //app.use(express.urlencoded({ extended: false }));
 
@@ -69,6 +74,7 @@ app.get('/', (req,res) => {
 app.use('/home/', indexRouter);
 app.use('/home/', authRouter);
 app.use('/home/', messageRouter);
+app.use('/images/', imageRouter);
 
 app.use(bodyParser.json());
 

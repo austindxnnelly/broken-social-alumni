@@ -62,12 +62,12 @@ var auth = function (req, res, next) {
 }
 
 router.get('/profile', auth, (req, res) => {
-  res.render('profile', {isAuthenticated: true, title: "User Profile", lastname: req.user.last_name, firstname: req.user.first_name, email: req.user.email});
+  res.render('profile', {isAuthenticated: true, title: "User Profile", lastname: req.user.last_name, firstname: req.user.first_name, email: req.user.email, profilePictures: req.user.profile_photo});
   console.log(req.user);
   console.log(req.session.passport.user);
 });
 
-router.post('/profile', async (req, res) => {
+/*router.post('/profile', async (req, res) => {
   try {
     const user = await user_json.findOne(user_doc);
     const fname = user.first_name;
@@ -89,18 +89,11 @@ router.post('/profile', async (req, res) => {
     await user.save();
     
     // Render the profile page with the updated profile picture
-    res.render('profile', {
-      isAuthenticated: true,
-      title: "User Profile",
-      firstname: fname,
-      lastname: lname,
-      email: user.email,
-      profilePictures: filename
-    });
+    res.redirect('/home/profile');
   } catch (error) {
     res.render('profile', {errors: 'An error occurred'})
   }
-});
+});*/
 
 
 module.exports = router;
