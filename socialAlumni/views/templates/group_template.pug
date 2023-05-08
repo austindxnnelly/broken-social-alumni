@@ -1,0 +1,18 @@
+section
+    div(class='column-profile')
+        form(class="form-profile", method='get')
+            fieldset 
+                div
+                label(for="groupName") Group Name:
+                div
+                label(for="name") #{group.name}
+                div
+                label(for="groupDesc") Group Description: 
+                div
+                label(for="desc")  #{group.description}
+                div
+                label(for="groupMembers") Group Members: 
+                div
+                label(for="members") #{group.users}
+        a(href='/home/' + group.name + '/feed')
+            button Group Dashboard

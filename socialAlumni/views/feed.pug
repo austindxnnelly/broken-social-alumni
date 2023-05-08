@@ -5,7 +5,7 @@ block content
     include nav 
 
     body
-    form(action='/home/feed', method = 'post', id="post-form")
+    form(action='/home/' + group +'/feed', method = 'post', id="post-form")
         input(id="content" type="text" autocomplete="off" placeholder="Aa" name="content")
         button(id="post-button" type="submit") Post
 

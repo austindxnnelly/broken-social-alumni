@@ -6,19 +6,21 @@ const PostDB = require('../models/post_schema');
 
 const router = express.Router();
 
-router.get('/feed', async(req, res) => {
+
+router.get('/:id/feed', async(req, res) => {
     // query all the messages
+    const group = req.params.id;
     const sender = req.user.email;
-    var postsSent = await PostDB.find({username_sent: sender});
-    for(let i = 0; i < postsSent.length; i++){
-        postsSent[i]["owner"] = true;
-    }
+    var postsSent = await PostDB.find({group: group});
+    //for(let i = 0; i < postsSent.length; i++){
+    //    postsSent[i]["owner"] = true;
+    //}
   
     var userRecieved = await UserDB.findOne({email: sender});
     var nameRecieved = userRecieved["first_name"];
   
-    console.log("USER: " + userRecieved);
-    console.log("NAME: " + nameRecieved);
+   // console.log("USER: " + userRecieved);
+    //console.log("NAME: " + nameRecieved);
   
     const posts = postsSent;
     var sort_func = (a, b) => b.date - a.date;
@@ -34,19 +36,24 @@ router.get('/feed', async(req, res) => {
         isAuthenticated: true,
         posts: posts,
         user: userRecieved,
-        username: nameRecieved
+        username: nameRecieved,
+        group: group
     });
 
 });
 
-router.post('/feed', async (req, res) => {
+
+
+
+router.post('/:id/feed', async (req, res) => {
   // get the data from the request body 
   const post_document = {
       username_sent: req.user.email,
       message_content: req.body.content,
       date: new Date().getTime(),
+      group: req.params.id
   };
-  let reciever = req.params.id
+  group = req.params.id;
 
   console.log(req);
   
@@ -54,7 +61,9 @@ router.post('/feed', async (req, res) => {
   const db_info = await PostDB.create(post_document);
   
   // tell the client it worked!
-  res.redirect('/home/feed');
+  res.redirect('/home/' + group + '/feed');
 });
+
+
 
 module.exports = router;

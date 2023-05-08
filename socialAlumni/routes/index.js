@@ -7,6 +7,7 @@ const user_json = require('../models/user_schema');
 const alumni_json = require('../models/alumni_schema');
 const PostDB = require('../models/post_schema');
 //const user_s = require('../models/user');
+const group_json = require('../models/group_schema');
 
 
 const router = express.Router();
@@ -98,8 +99,12 @@ router.get('/profile', auth, (req, res) => {
 
 
 
+router.get('/groups', async(req, res) => {
+  let groups = await group_json.find({});
+
+  res.render('groups', {groups : groups, isAuthenticated: true, title: "Groups"});
+});
+
+
 module.exports = router;
 
-router.get('/groups', (req, res) => {
-  res.render('groups', {isAuthenticated: true, title: "Groups"});
-});

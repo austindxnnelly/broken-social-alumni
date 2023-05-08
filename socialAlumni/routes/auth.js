@@ -8,7 +8,8 @@ const secretkey = "secret";
 const { body, validationResult } = require('express-validator')
 
 const User = require('../models/user')
-const alumni_json = require('../models/alumni_schema')
+const alumni_json = require('../models/alumni_schema');
+const group_json = require('../models/group_schema');
 
 const router = express.Router()
 
@@ -23,7 +24,7 @@ router.post('/create', async (req, res) => {
       profile_photo: req.body.photo_source
 
     })
-
+    
     req.files.photo_upload.mv('./public/profilePictures/' + req.files.photo_upload.name);
     await User.register(user, req.body.password);
     return res.redirect('/home/signin');
