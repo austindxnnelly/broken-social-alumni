@@ -21,7 +21,7 @@ router.get('/feed', async(req, res) => {
     console.log("NAME: " + nameRecieved);
   
     const posts = postsSent;
-    var sort_func = (a, b) => a.date - b.date;
+    var sort_func = (a, b) => b.date - a.date;
     posts.sort(sort_func);
   
   
