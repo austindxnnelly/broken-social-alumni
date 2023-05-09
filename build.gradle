@@ -46,15 +46,11 @@ node {
 }
 
 tasks {
-  test {
-    useMocha {
-        testClassesDir = sourceSets.test.output.classesDir
-        classpath = sourceSets.test.runtimeClasspath
-        ignoreExitValue true
-        workingDir file("${projectDir}/SocialAlumni")
-        options {
-            reporter = "spec"
-            timeout = "10000"
+    test {
+    doLast {
+        def testScript = new File('test.js')
+        exec {
+            commandLine 'npm', 'run', 'test'
         }
     }
 }
