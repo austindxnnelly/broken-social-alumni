@@ -13,7 +13,11 @@ apply plugin: 'com.moowork.node'
 repositories {
   mavenCentral()
 }
-
+sourceSets {
+    test {
+        javascript.srcDirs = ['src/test']
+    }
+}
 dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
     implementation 'com.fasterxml.jackson.core:jackson-core:2.13.1'
@@ -32,7 +36,11 @@ dependencies {
     implementation 'org.eclipse.jetty.websocket:websocket-servlet:11.0.2'
     implementation 'org.eclipse.jetty.websocket:javax-websocket-server-impl:9.4.32.v20200930'
     implementation 'org.eclipse.jetty.websocket:javax-websocket-client-impl:9.4.32.v20200930'
-
+    testImplementation 'org.testng:testng:7.4.0'
+    testImplementation 'org.mockito:mockito-core:3.10.0'
+    testImplementation 'org.hamcrest:hamcrest-core:2.2'
+    testImplementation 'com.github.javaparser:javaparser-core:3.19.0'
+    testImplementation 'tape:tape:5.0.1'
 
 
 }
@@ -46,11 +54,8 @@ node {
 
 tasks {
     test {
-    doLast {
-        def testScript = new File('test.js')
-        exec {
-            commandLine 'npm', 'run', 'test'
-        }
+    useTape {
+        include '**/*.js'
     }
 }
 
