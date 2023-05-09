@@ -32,8 +32,7 @@ dependencies {
     implementation 'org.eclipse.jetty.websocket:websocket-servlet:11.0.2'
     implementation 'org.eclipse.jetty.websocket:javax-websocket-server-impl:9.4.32.v20200930'
     implementation 'org.eclipse.jetty.websocket:javax-websocket-client-impl:9.4.32.v20200930'
-    testImplementation 'mocha:mocha:8.1.3'
-    testImplementation 'chai:chai:4.2.0'
+
 
 
 }
