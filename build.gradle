@@ -15,7 +15,7 @@ repositories {
 }
 sourceSets {
     test {
-        javascript.srcDirs = ['src/test']
+        java.srcDirs = ['src/test']
     }
 }
 dependencies {
