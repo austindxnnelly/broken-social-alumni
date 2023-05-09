@@ -3,15 +3,15 @@ section
         form(class="form-profile", method='get')
             fieldset 
                 div
-                label(for="groupName") Group Name:
+                label(for="groupName") <b>Group Name:</b>
                 div
                 label(for="name") #{group.name}
                 div
-                label(for="groupDesc") Group Description: 
+                label(for="groupDesc") <b>Group Description:</b> 
                 div
                 label(for="desc")  #{group.description}
                 div
-                label(for="groupMembers") Group Members: 
+                label(for="groupMembers") <b>Group Members:</b> 
                 div
                 label(for="members") #{group.users}
         a(href='/home/' + group.name + '/feed')
