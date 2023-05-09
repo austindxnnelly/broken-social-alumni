@@ -1,6 +1,10 @@
 body {
-  padding: 50px;
+  padding: 0;
+  margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: var(--light-color);
+  text-align: center;
+  margin-top: -20px;
 }
 
 a {
@@ -11,9 +15,12 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   padding: 17px;
   background-color: #333;
   color: #fff;
+  box-sizing: border-box;
+  margin-top: -20px;
 }
 
 nav ul {
@@ -34,15 +41,10 @@ nav a {
 }
 
 :root {
-  --primary-color: #2e8b57;
+  --primary-color: green;
   --secondary-color: #6c757d;
   --light-color: #f8f9fa;
   --dark-color: #343a40;
-}
-
-body {
-  background-color: var(--light-color);
-  text-align: center;
 }
 
 h1 {
