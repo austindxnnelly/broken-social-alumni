@@ -7,17 +7,12 @@ block content
     p 
     div(class='row-profile')
         legend Profile Settings
-        div(class='card-image')
+        div(class='column-profile')
            form(class="form-profile", method='get')
-                label(for="profilePictures") Profile Picture 
-                //-div
-                //-input(type="file" name="profilePictures", id= "profilePictures", accept="image/*")
-                //-p
-                //-input(type="submit", value="Upload")
-                //-div
-                label #{firstname + " " + lastname}
-                 if profilePictures 
-                img(src=`/profilePictures/${profilePictures}`, alt="Profile pictures")
+                fieldset 
+                    label(for="profilePictures") Profile Picture 
+                    br
+                    img(src=`/profilePictures/${profilePictures}`, alt="Profile pictures" height="500" width="500")
         div(class='column-profile')
             form(class="form-profile", method='get')
                 fieldset 

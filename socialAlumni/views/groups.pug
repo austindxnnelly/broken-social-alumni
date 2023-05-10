@@ -5,5 +5,19 @@ block content
     include nav 
     main
         a(id="post-button" href='/home/create-group') Create Group
-        each group in groups
-            include templates/group_template.pug
+        br
+        p Your Groups
+            each group in yourGroups
+                include templates/group_member_template.pug
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        p Other Groups
+            each group in groups
+                include templates/group_template.pug            

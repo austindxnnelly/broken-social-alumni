@@ -7,6 +7,11 @@ body {
   margin-top: -20px;
 }
 
+img{
+    max-width: 100%;
+    height: auto;
+}
+
 a {
   color: #00B7FF;
 }

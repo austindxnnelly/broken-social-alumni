@@ -72,9 +72,12 @@ router.get('/profile', auth, (req, res) => {
 
 
 router.get('/groups', async(req, res) => {
-  let groups = await group_json.find({});
 
-  res.render('groups', {groups : groups, isAuthenticated: true, title: "Groups"});
+  let yourGroups = await group_json.find({members: req.user.email}); 
+  let groups = await group_json.find({ members: { $ne: req.user.email }});
+  let gourps = await group_json.fi
+
+  res.render('groups', {yourGroups : yourGroups, groups: groups, isAuthenticated: true, title: "Groups"});
 });
 
 router.post('/create-group', async(req, res) => {
