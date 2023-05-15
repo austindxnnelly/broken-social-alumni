@@ -4,48 +4,9 @@ block content
     title Home 
     h1= title
     include nav 
-    p Send a message 
-    p 
-    div(class="column-message")
-        label(for="inputFirstName") First Name 
-        input(type="text" id="name")
-        p
-        p 
-        label(for="inputRecepient") Recepient
-        input(type="text" id="recepient") 
-    div(class="column-message")
-        label(for="inputMessage") Message 
-        input(type="text" id="message")
-        p
-        a(class='button' href='/message') Send message 
-    script.
-        $(() => {
-            $("#send").click(()=>{
-       sendMessage({
-          name: $("#name").val(), 
-          message:$("#message").val()});
-            })
-      getMessages()
-        })
-    
-        function addMessages(message){
-            $("#messages").append(`
-            <h4> ${message.name} </h4>
-            <p>  ${message.message} </p>`)
-            }
-   
-        function getMessages(){
-            $.get(‘http://localhost:3000/messages', (data) => {
-            data.forEach(addMessages);
-            })
-        }
- 
-        function sendMessage(message){
-            $.post(‘http://localhost:3000/messages', message)
-            }
-        src=”/socket.io/socket.io.js”
+    p Messages 
+    main
+        each message in messages
+            include templates/message_recieved.pug
 
-        var socket = io();
-
-        socket.on(‘message’, addMessages)
 

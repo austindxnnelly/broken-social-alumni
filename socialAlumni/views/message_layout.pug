@@ -8,7 +8,9 @@ html
     link(preload rel="stylesheet" href="/stylesheets/chat.css")
   body
     header
-        p(class="my-username") #{username}
+        h1 #{username} 
+        //include nav
+    
         
     main(id="chat-log-container")
         each message in messages

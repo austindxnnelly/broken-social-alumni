@@ -6,7 +6,7 @@
     --theme-primary: #1a4c87;
     --theme-secondary: #eec217;
 
-    --primary-color: #2e8b57;
+    --primary-color: green;
     --secondary-color: #6c757d;
     --light-color: #f8f9fa;
     --dark-color: #343a40;
@@ -27,13 +27,11 @@ body {
     background: #E0E0E0;
 }
 header {
-    background: var(--primary-color);
+    background-color: #333;
     text-align: center;
     padding: 8px;
-    border-bottom: 10px solid var(--secondary-color);
     display: flex;
     align-items: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     z-index: 10;
 }
 header h1 {
@@ -43,6 +41,7 @@ header h1 {
     
 }
 
+
 /* form style */
 #message-form {
     background: white;
@@ -50,7 +49,7 @@ header h1 {
     flex-direction: column;
     justify-content: center;
     padding: 10px;
-    background: var(--primary-color);
+    background:  #333;
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.5);
 }
 #message-form > #message-button {
@@ -67,8 +66,8 @@ header h1 {
 button {
     border-radius: var(--rounded-corner);
     padding: 16px;
-    background: var(--primary-color);
-    color: white;
+    background: white;
+    color:  #333;
     box-shadow: none;
     transition: padding 0.2s;
     border: 1px solid rgba(0, 0, 0, 0.3);

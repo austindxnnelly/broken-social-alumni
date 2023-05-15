@@ -14,8 +14,12 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  if (req.isAuthenticated()) {
+    res.redirect('profile', { title: 'User Profile', isAuthenticated: true });
+  }
+  else {
   res.render('index', { title: 'Social Alumni' });
-  console.log(req.user)
+}
 });
 
 router.get('/search', async(req, res) => {
@@ -29,9 +33,6 @@ router.get('/search', async(req, res) => {
 
 
 
-router.get('/message', (req, res) => {
-
-});
 
 router.get('/nav', (req, res) => {
   if (user) {
@@ -63,10 +64,13 @@ var auth = function (req, res, next) {
   res.status(401).json("not authenticated!");
 }
 
-router.get('/profile', auth, (req, res) => {
-  res.render('profile', {isAuthenticated: true, title: "User Profile", lastname: req.user.last_name, firstname: req.user.first_name, email: req.user.email, profilePictures: req.user.profile_photo});
+router.get('/profile', auth, async(req, res) => {
+  let user = await user_json.findOne({email: req.session.passport.user})
+  res.render('profile', {isAuthenticated: true, title: "User Profile", lastname: user.last_name, firstname: user.first_name, email: user.email, profilePictures: req.user.profile_photo});
   console.log(req.user);
   console.log(req.session.passport.user);
+  console.log(user.first_name);
+  console.log(user.last_name);
 });
 
 
@@ -75,8 +79,7 @@ router.get('/groups', async(req, res) => {
 
   let yourGroups = await group_json.find({members: req.user.email}); 
   let groups = await group_json.find({ members: { $ne: req.user.email }});
-  let gourps = await group_json.fi
-
+  
   res.render('groups', {yourGroups : yourGroups, groups: groups, isAuthenticated: true, title: "Groups"});
 });
 
@@ -102,7 +105,7 @@ router.get('/:id/join', async(req, res) => {
 const db_info = await group_json.findOneAndUpdate({name: group}, {$push: {members: req.user.email}});
 
 // tell the client it worked!
-res.redirect('/home/' + group + '/feed');
+res.redirect('/home/groups');
 });
 
 
