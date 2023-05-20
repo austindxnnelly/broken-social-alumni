@@ -1,4 +1,4 @@
-nav
+//- nav(class='navbar navbar-expand-md navbar-dark fixed-top bg-dark')
   ul
     if isAuthenticated
       li
@@ -22,4 +22,37 @@ nav
     form(action='/home/search', method='get')
       label(for='search') Search
       input(type='text' name='search' id='search' placeholder="search...")
-      button(type='submit')
+      button(type='submit') -//
+
+div(class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start")
+  a(href="/" class="d-flex align-items-center mb-3 mb-md-auto text-white text-decoration-none")
+    span(class="fs-4" style="padding-right: 50px") Social Alumni
+  
+
+        
+  ul(class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0")
+    if isAuthenticated
+      li
+        a(href='/home/profile' class="nav-link px-2 text-secondary") Profile
+      li
+        a(href='/home/messages' class="nav-link px-2 text-white") Messages
+      li 
+        a(href='/home/groups' class="nav-link px-2 text-white") Groups
+      li 
+        a(href='/home/main/feed' class="nav-link px-2 text-white") Timeline 
+      li
+        a(href='/home/logout' class="nav-link px-2 text-white") Logout
+    else
+      li
+        a(href='/home/' class="nav-link px-2 text-white") Home
+      li
+        a(href='/home/signin' class="nav-link px-2 text-white") Login
+      li
+        a(href='/home/create' class="nav-link px-2 text-white") Sign up
+  if isAuthenticated
+    form(class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search")
+      input(type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search")
+
+    div(class="text-end")
+      button(type="button" class="btn btn-outline-light me-2") Search
+          

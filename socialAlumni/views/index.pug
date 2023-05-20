@@ -3,7 +3,9 @@ extends layout
 block content
   title Home
   //So the title is stored under the index.js page in the get home page router method 
-  h1= title 
-  include nav 
+  header(class="p-3 text-bg-dark d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom")
+      div(class="container")
+        include nav 
+  
   p Welcome to #{title} Networking for Otago Students and Alumni
   

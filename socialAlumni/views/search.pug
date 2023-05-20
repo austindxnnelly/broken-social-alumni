@@ -4,8 +4,9 @@ html
     title Search
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    h1 Search
-    include nav 
+  header(class="p-3 text-bg-dark d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom")
+      div(class="container")
+        include nav 
     main
         each user in usersearch
             include templates/user_results.pug

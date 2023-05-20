@@ -1,8 +1,9 @@
 extends layout
 
 block content
-    h1 Groups 
-    include nav 
+    header(class="p-3 text-bg-dark d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom")
+        div(class="container")
+            include nav 
     main
         a(id="post-button" href='/home/create-group') Create Group
         br
