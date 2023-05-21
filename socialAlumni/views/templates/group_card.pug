@@ -3,5 +3,7 @@ section(class="col")
         div(class="card-body")
             h5(class="card-title") #{group.name}
             p(class="card-text") #{group.description}
+            a(href='/home/' + group.name + '/join')
+                button Join Group
             a(href='/home/' + group.name + '/feed')
                 button Group Dashboard

@@ -1,4 +1,4 @@
-section
+//-section
     div(class='column-profile')
         form(class="form-profile", method='get')
             fieldset 
@@ -16,3 +16,15 @@ section
                 label(for="email") #{user.email}
         a(href='/home/' + user.email + '/all-messages')
             button Message User
+
+section(class='card')
+    div(class="card-image")
+        img(src=`/profilePictures/${user.profile_photo}`, alt="Profile pictures" height="500" width="500")
+        div(class="card-title")
+            p(lang="mi") #{user.first_name} #{user.last_name}
+    div(class="card-content")
+        h2(class="card-title") 
+        ul
+            li
+                b Email
+                span=user.email

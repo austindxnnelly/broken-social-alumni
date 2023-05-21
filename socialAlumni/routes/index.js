@@ -3,10 +3,10 @@ const { req } = require('express');
 const { body, validationResult } = require('express-validator');
 var search_controller = require('../controllers/search_controller');
 
-const user_json = require('../models/user_schema');
+//const user_json = require('../models/user_schema');
 const alumni_json = require('../models/alumni_schema');
 const PostDB = require('../models/post_schema');
-//const user_s = require('../models/user');
+const USERDB = require('../models/user');
 const group_json = require('../models/group_schema');
 
 
@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/search', async(req, res) => {
-  let users = await user_json.find({});
+  let users = await USERDB.find({});
   let search = req.query.search;
 
   res.render('search' , {
@@ -65,7 +65,7 @@ var auth = function (req, res, next) {
 }
 
 router.get('/profile', auth, async(req, res) => {
-  let user = await user_json.findOne({email: req.session.passport.user})
+  let user = await USERDB.findOne({email: req.session.passport.user})
   res.render('profile', {isAuthenticated: true, title: "User Profile", lastname: user.last_name, firstname: user.first_name, email: user.email, profilePictures: req.user.profile_photo});
   console.log(req.user);
   console.log(req.session.passport.user);
