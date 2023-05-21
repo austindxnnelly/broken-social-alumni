@@ -2,10 +2,12 @@ extends layout
 
 block content
   title Home
+  link(href="/stylesheets/index.css" rel="stylesheet")
   //So the title is stored under the index.js page in the get home page router method 
   header(class="p-3 text-bg-dark d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom")
       div(class="container")
         include nav 
   
-  p Welcome to #{title} Networking for Otago Students and Alumni
-  
+  .welcome-message
+    h1(class="welcome-title") Welcome to #{title}
+    p(class="welcome-description") Networking for Otago Students and Alumni
