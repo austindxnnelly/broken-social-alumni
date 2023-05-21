@@ -3,6 +3,7 @@ const { req } = require('express');
 const MessageDB = require('../models/message_schema');
 const UserDB = require('../models/user');
 const PostDB = require('../models/post_schema');
+const ReplyDB = require('../models/reply_schema');
 
 const router = express.Router();
 
@@ -18,7 +19,9 @@ router.get('/:id/feed', async(req, res) => {
   
     var userRecieved = await UserDB.findOne({email: sender});
     var nameRecieved = userRecieved["first_name"];
-  
+    
+    
+
    // console.log("USER: " + userRecieved);
     //console.log("NAME: " + nameRecieved);
   
@@ -27,9 +30,6 @@ router.get('/:id/feed', async(req, res) => {
     posts.sort(sort_func);
   
   
-  
-    console.log(posts);
-  
     // respond to the client with the messages (as json)
     res.render('feed',{
         title: "Timeline",
@@ -37,7 +37,7 @@ router.get('/:id/feed', async(req, res) => {
         posts: posts,
         user: userRecieved,
         username: nameRecieved,
-        group: group
+        group: group,
     });
 
 });
@@ -46,6 +46,7 @@ router.get('/:id/feed', async(req, res) => {
 
 
 router.post('/:id/feed', async (req, res) => {
+    console.log("HERE");
   // get the data from the request body 
   const post_document = {
       username_sent: req.user.email,
@@ -55,7 +56,7 @@ router.post('/:id/feed', async (req, res) => {
   };
   group = req.params.id;
 
-  console.log(req);
+  //console.log(req);
   
   // insert the data into the database
   const db_info = await PostDB.create(post_document);
@@ -64,6 +65,32 @@ router.post('/:id/feed', async (req, res) => {
   res.redirect('/home/' + group + '/feed');
 });
 
+router.post('/:groupid/feed/:postid/reply', async (req, res) => {
+    console.log("HERE");
+    // get the data from the request body 
+    const reply_document = {
+        username_sent: req.user.email,
+        date: new Date().getTime(),
+        message_content: req.body.reply,
+        group: req.params.groupid,
+        parent_post: req.params.groupid
+    };
+    group = req.params.groupid;
+    post = req.params.postid;
+
+    console.log(req.params.postid);
+    
+    // insert the data into the database
+    const reply_info = await ReplyDB.create(reply_document);
+    replyid = reply_info.id;
+    
+    //reply_id = await ReplyDB.find
+    const post_info = await PostDB.findOneAndUpdate({_id: post}, {$push: {replies: reply_document}});
+    console.log(post_info);
+
+    // tell the client it worked!
+    res.redirect('/home/' + group + '/feed');
+  });
 
 
 module.exports = router;

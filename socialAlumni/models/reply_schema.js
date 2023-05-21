@@ -2,17 +2,17 @@ const mongoose = require("mongoose");
 const UserS = require('../models/user');
 
 
-const postSchema = new mongoose.Schema({
+const replySchema = new mongoose.Schema({
     username_sent: {type: String, required: true},
     date: {type: Date, required: true},
     message_content: {type: String, required: true},
     owner: {type: Boolean},
     group: {type: String, required: true},
-    replies: {type: []}
+    parent_post: {type: String, required: true}
 
 
 })
 
-const post_schema = mongoose.model('post', postSchema);
+const reply_schema = mongoose.model('reply', replySchema);
 
-module.exports = post_schema;
+module.exports = reply_schema;

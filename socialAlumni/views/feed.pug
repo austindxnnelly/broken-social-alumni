@@ -17,5 +17,5 @@ html
           input(id="content" type="text" autocomplete="off" placeholder="Share to the timeline here!" name="content")
           button(id="post-button" type="submit") Post
 
-          each post in posts
-            include templates/post_template.pug
+        each post in posts
+          include templates/post_template.pug

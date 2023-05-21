@@ -1,5 +1,14 @@
-section(class="all-posts") 
+//-section(class="all-posts") 
     div.post-box         
         p(class='post-content' id='postcontent') #{post.message_content}
         p(class='sender-name') #{post.username_sent}
-        
+
+div(class="card")
+    div(class="card-body")
+        h5(class="card-title") #{post.username_sent}
+        p(class="card-text") #{post.message_content}
+    ul(class="list-group list-group-flush")
+        each reply in post.replies
+            li(class="list-group-item") #{reply.message_content}
+    form(class="form-signin" action='/home/' + group +'/feed/' + post.id + '/reply', method = 'post', id="post-form")
+        input(type="text", name="reply" class="form-control" placeholder="Reply..." aria-label="Reply")
