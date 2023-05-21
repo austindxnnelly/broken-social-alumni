@@ -5,11 +5,11 @@ block content
       div(class="container")
         include nav 
 
-    body
-    form(action='/home/' + group +'/feed', method = 'post', id="post-form")
-        input(id="content" type="text" autocomplete="off" placeholder="Aa" name="content")
-        button(id="post-button" type="submit") Post
+        body
+          form(action='/home/' + group +'/feed', method = 'post', id="post-form")
+          input(id="content" type="text" autocomplete="off" placeholder="Aa" name="content")
+          button(id="post-button" type="submit") Post
 
-    main
-        each post in posts
-          include templates/post_template.pug
+          main
+            each post in posts
+              include templates/post_template.pug
