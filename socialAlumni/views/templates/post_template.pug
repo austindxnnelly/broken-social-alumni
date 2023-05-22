@@ -11,4 +11,4 @@ div(class="form-control")
         each reply in post.replies
             li(class="form-control") #{reply.message_content}
     form(class="form-signin" action='/home/' + group +'/feed/' + post.id + '/reply', method = 'post', id="post-form")
-        input(type="input", name="reply" class="form-control" placeholder="Reply..." aria-label="Reply")
+        input(type="input", name="reply" class="form-control" placeholder="Reply..." aria-label="Reply" required)
