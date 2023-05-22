@@ -25,6 +25,8 @@ section(class='card')
     div(class="card-content")
         h2(class="card-title") 
         ul
-            li
-                b Email
+            li Email
                 span=user.email
+        a(href='/home/' + user.email + '/all-messages')
+            button Message User
+        
