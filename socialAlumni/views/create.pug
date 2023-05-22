@@ -33,11 +33,9 @@ html
         div(class="form-floating")
           label(for="inputPhone") Phone
           input(type="number", id="inputPhone", name='inputPhone' class="form-control" placeholder="Phone Number")
-        div(class="form-floating")
-          label(for='photo_upload') Upload Photo 
+        div(class="form-floating") 
           img(id="upload_preview", src='/images/' class="rounded mx-auto d-block")
-          input(id="upload_source" type="image" name="photo_source" readonly="readonly" value="default.jpg")
-          input(name='photo_upload', type='file', id="photo_upload" placeholder="Upload Photo")
+          input(name='photo_upload', type='file', id="photo_upload" placeholder="Upload Photo" class="form-control")
 
 
         

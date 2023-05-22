@@ -1,14 +1,14 @@
-//-section(class="all-posts") 
-    div.post-box         
-        p(class='post-content' id='postcontent') #{post.message_content}
-        p(class='sender-name') #{post.username_sent}
+link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous")
+//-link(rel='stylesheet', href='/stylesheets/style.css')
+link(href="/stylesheets/feed.css" rel="stylesheet")
+script(defer, src='/javascripts/preview_image.js')
 
-div(class="card")
+div(class="form-control")
     div(class="card-body")
         h5(class="card-title") #{post.username_sent}
         p(class="card-text") #{post.message_content}
     ul(class="list-group list-group-flush")
         each reply in post.replies
-            li(class="list-group-item") #{reply.message_content}
+            li(class="form-control") #{reply.message_content}
     form(class="form-signin" action='/home/' + group +'/feed/' + post.id + '/reply', method = 'post', id="post-form")
-        input(type="text", name="reply" class="form-control" placeholder="Reply..." aria-label="Reply")
+        input(type="input", name="reply" class="form-control" placeholder="Reply..." aria-label="Reply" required)
