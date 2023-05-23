@@ -15,7 +15,7 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if (req.isAuthenticated()) {
-    res.redirect('profile', { title: 'User Profile', isAuthenticated: true });
+    res.redirect('profile');
   }
   else {
   res.render('index', { title: 'Social Alumni' });
@@ -23,63 +23,75 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/search', async(req, res) => {
-  let users = await USERDB.find({});
-  let search = req.query.search;
-
-  res.render('search' , {
-    usersearch: search_controller.filter_users(search, users), isAuthenticated: true
-  });
-})
-
-
-
-router.get('/nav', (req, res) => {
-  if (user) {
-    const isAuthenticated = req.isAuthenticated();
-    res.render('nav', { isAuthenticated });
-  } else {
-    res.render('nav')
+  if (req.isAuthenticated()) {
+    let users = await USERDB.find({});
+    let search = req.query.search;
+  
+    res.render('search' , {
+      usersearch: search_controller.filter_users(search, users), 
+      isAuthenticated: true
+    });
   }
+  else {
+  res.redirect("/home/");
+}
 });
 
-router.post('/logout', function(req, res){
-  req.logout(function(err) {
-    if (err) { return next(err); }
-    res.redirect('/');
-  });
-  });
+
 
 router.get('/logout', function(req, res){
-  req.logout(function(err) {
-    if (err) { return next(err); }
-    res.redirect('/home/signin');
-  });
+  if (req.isAuthenticated()) {
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      res.redirect('/home/signin');
+    });
+  }
+  else {
+    res.redirect('/home/')
+}
+
   });
 
 
 var auth = function (req, res, next) {
-  if (req.isAuthenticated())
+  if (req.isAuthenticated()){
     return next();
+  }
   res.status(401).json("not authenticated!");
 }
 
-router.get('/profile', auth, async(req, res) => {
-  let user = await USERDB.findOne({email: req.session.passport.user})
-  res.render('profile', {isAuthenticated: true, title: "User Profile", lastname: user.last_name, firstname: user.first_name, email: user.email, profilePictures: req.user.profile_photo});
-  console.log(req.user);
-  console.log(req.session.passport.user);
-  console.log(user.first_name);
-  console.log(user.last_name);
+router.get('/profile', async(req, res) => {
+  if (req.isAuthenticated()) {
+    let user = await USERDB.findOne({email: req.session.passport.user});
+    
+    res.render('profile', {
+      isAuthenticated: true, 
+      title: "User Profile", 
+      lastname: user.last_name, 
+      firstname: user.first_name, 
+      email: user.email, 
+      profilePictures: req.user.profile_photo
+    });
+  } else {
+    res.redirect("/home/");
+  }
 });
 
-
-
 router.get('/groups', async(req, res) => {
+  if (req.isAuthenticated()) {
+    let yourGroups = await group_json.find({members: req.user.email}); 
+    let groups = await group_json.find({ members: { $ne: req.user.email }});
+    
+    res.render('groups', {
+      yourGroups : yourGroups, 
+      groups: groups, 
+      isAuthenticated: true, 
+      title: "Groups"
+    });
 
-  let yourGroups = await group_json.find({members: req.user.email}); 
-  let groups = await group_json.find({ members: { $ne: req.user.email }});
-  
-  res.render('groups', {yourGroups : yourGroups, groups: groups, isAuthenticated: true, title: "Groups"});
+  } else {
+    res.redirect("/home/");
+  }
 });
 
 router.post('/create-group', async(req, res) => {
@@ -95,16 +107,27 @@ router.post('/create-group', async(req, res) => {
 
 
 router.get('/create-group', async(req, res) => {
-  res.render('create_group', {isAuthenticated: true, title: "Create Group"});
+  if (req.isAuthenticated()) {
+    res.render('create_group', {
+      isAuthenticated: true, 
+      title: "Create Group"
+    });
+  } else {
+    res.redirect("/home/");
+}
 });
 
 router.get('/:id/join', async(req, res) => {
-  let group = req.params.id
-// insert the data into the database
-const db_info = await group_json.findOneAndUpdate({name: group}, {$push: {members: req.user.email}});
+  if (req.isAuthenticated()) {
+    let group = req.params.id
+    // insert the data into the database
+    const db_info = await group_json.findOneAndUpdate({name: group}, {$push: {members: req.user.email}});
 
-// tell the client it worked!
-res.redirect('/home/groups');
+    // tell the client it worked!
+    res.redirect('/home/groups');
+  } else {
+    res.redirect("/home/");
+  }
 });
 
 
