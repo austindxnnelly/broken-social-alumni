@@ -11,3 +11,8 @@ li {
     text-align: left;
     margin: 5px;
 }
+
+button {
+  margin-left: 2px;
+  margin-right: 2px;
+}
