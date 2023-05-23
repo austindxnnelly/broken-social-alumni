@@ -3,6 +3,11 @@ body {
   height: 100%;
 }
 
+li {
+  text-align: left;
+  margin: 5px;
+}
+
 
 .form-signin {
   max-width: 330px;

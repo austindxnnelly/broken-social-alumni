@@ -13,3 +13,8 @@
     font-size: 18px;
     color: #666;
   }
+
+  li {
+    text-align: left;
+    margin: 5px;
+}

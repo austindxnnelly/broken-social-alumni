@@ -6,3 +6,8 @@ html,
 body {
   height: 100%;
 }
+
+li {
+    text-align: left;
+    margin: 5px;
+}

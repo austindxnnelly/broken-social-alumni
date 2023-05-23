@@ -24,3 +24,8 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+li {
+  text-align: left;
+  margin: 5px;
+}
