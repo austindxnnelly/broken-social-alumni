@@ -39,16 +39,59 @@ router.get('/:id/all-messages', async (req, res) => {
         }
     }
 
+    var userMessagesRecieved = await MessageDB.find({username_recieved: sender});
+    var usermessagesSent = await MessageDB.find({username_sent: sender});
+    for(let i = 0; i < usermessagesSent.length; i++){
+        usermessagesSent[i]["owner"] = true;
+    }
+    
+   // var userRecieved = await UserDB.findOne({email: sender});
+    //var nameRecieved = userMessagesRecieved["first_name"];
 
-    console.log(messages);
+   // console.log("USER: " + userRecieved);
+   // console.log("NAME: " + nameRecieved);
+
+    const userMessages = usermessagesSent.concat(userMessagesRecieved);
+    var sort_func = (a, b) => b.date - a.date;
+    userMessages.sort(sort_func);
+
+   let uniqueMessages = [];
+    let otherUsers = [];
+    for (let j = 0; j < userMessages.length; j++){
+        if(userMessages[j].username_sent == sender){
+            if(!otherUsers.includes(userMessages[j].username_recieved)){
+                otherUsers.push(userMessages[j].username_recieved);
+                userMessages[j].username_sent = userMessages[j].username_recieved;
+                userMessages[j].username_recieved = sender;
+                uniqueMessages.push(userMessages[j]);
+            }
+        } else {
+            if(!otherUsers.includes(userMessages[j].username_sent)){
+                otherUsers.push(userMessages[j].username_sent);
+                uniqueMessages.push(userMessages[j]);
+            }            
+        }
+    }
+    //let firstMessage = messages[0];
+    //console.log(uniqueMessages);
+    //console.log(otherUsers);
+
+  
+    res.render('message_page', {isAuthenticated: true, uniquemessages: uniqueMessages, messages: messages, recieved: reciever, username: nameRecieved}); //, {messages: firstMessage, isAuthenticated: true, title: "Messages"});
+ // });
+
+
+
+
+   //console.log(messages);
 
     // respond to the client with the messages (as json)
-    res.render('message_layout',{
+    /*res.render('message_layout',{
         messages: messages,
         recieved: reciever,
         username: nameRecieved,
         isAuthenticated: true
-    });
+    });*/
 
 });
 
@@ -77,6 +120,7 @@ router.post('/:id/all-messages', async (req, res) => {
 
 router.get('/messages', async(req, res) => {
     const sender = req.user.email;
+
     var messagesSent = await MessageDB.find({username_sent: sender});
     for(let i = 0; i < messagesSent.length; i++){
         messagesSent[i]["owner"] = true;
@@ -93,11 +137,32 @@ router.get('/messages', async(req, res) => {
     var sort_func = (a, b) => b.date - a.date;
     messages.sort(sort_func);
 
-    let firstMessage = messages.at(0);
-    console.log(firstMessage);
+   let uniqueMessages = [];
+    let otherUsers = [];
+    for (let j = 0; j < messages.length; j++){
+        if(messages[j].username_sent == sender){
+            if(!otherUsers.includes(messages[j].username_recieved)){
+                otherUsers.push(messages[j].username_recieved);
+                messages[j].username_sent = messages[j].username_recieved;
+                messages[j].username_recieved = sender;
+                uniqueMessages.push(messages[j]);
+            }
+        } else {
+            if(!otherUsers.includes(messages[j].username_sent)){
+                otherUsers.push(messages[j].username_sent);
+                uniqueMessages.push(messages[j]);
+            }            
+        }
+    }
+    //let firstMessage = messages[0];
+    console.log(uniqueMessages);
+    console.log(otherUsers);
+
+    console.log(uniqueMessages[0].username_sent)
 
   
-    res.render('message', {messages: firstMessage, isAuthenticated: true, title: "Messages"});
+    res.redirect('/home/' + uniqueMessages[0].username_sent + '/all-messages');
+    //, {messages: firstMessage, isAuthenticated: true, title: "Messages"});
   });
 
 
