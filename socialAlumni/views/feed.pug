@@ -13,7 +13,7 @@ html
   body(class = "text-center")
       main(class="form-signin w-100 m-auto text-center")
         form(action='/home/' + group +'/feed', method = 'post', id="post-form" class="row row-cols-lg-auto g-3 align-items-center d-flex justify-content-center mb-4")
-          input(id="content" type="text" class="form-control" autocomplete="off" placeholder="Share to the timeline here!" name="content")
+          textarea(id="content" type="text" class="form-control" autocomplete="off" placeholder="Share to the timeline here!" rows="3" name="content")
           button(id="post-button" type="submit" class="btn btn-outline-primary") Post
 
         each post in posts
