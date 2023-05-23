@@ -34,11 +34,12 @@ html
           input(type="number", id="inputPhone", name='inputPhone' class="form-control" placeholder="Phone Number")
           label(for="inputPhone") Phone
         div(class="form-floating") 
+          div
+            input(name='photo_upload', type='file', id="photo_upload" placeholder="Upload Photo" class="form-control" accept="image/x-png,image/gif,image/jpeg")
           img(id="upload_preview", src='/images/' class="rounded mx-auto d-block")
-          input(name='photo_upload', type='file', id="photo_upload" placeholder="Upload Photo" class="form-control")
+          div
+            input(id="upload_source" type="text" name="photo_source" readonly="readonly" value="default.jpg" class="form-control-plaintext")
 
-
-        
         button(type='submit' class="w-100 btn btn-lg btn-primary") Create Account
  
   //-p

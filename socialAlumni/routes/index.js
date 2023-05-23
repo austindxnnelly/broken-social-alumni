@@ -33,7 +33,6 @@ router.get('/search', async(req, res) => {
 
 
 
-
 router.get('/nav', (req, res) => {
   if (user) {
     const isAuthenticated = req.isAuthenticated();

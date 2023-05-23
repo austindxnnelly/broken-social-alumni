@@ -12,6 +12,7 @@ html
 
   body(class = "text-center")
     main(class="form-signin w-100 m-auto text-center")
+      p #{errors}
       form(action='/home/signin', method='post')
         h1(class="h3 mb-3 fw-normal") User Information
         div(class="form-floating")

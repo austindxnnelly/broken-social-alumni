@@ -4,6 +4,7 @@ const MessageDB = require('../models/message_schema');
 const UserDB = require('../models/user');
 const PostDB = require('../models/post_schema');
 const ReplyDB = require('../models/reply_schema');
+var assign_badge = require('../public/javascripts/assign_badge')
 
 const router = express.Router();
 
@@ -55,11 +56,19 @@ router.post('/:id/feed', async (req, res) => {
       group: req.params.id
   };
   group = req.params.id;
+  user = req.user.email;
 
   //console.log(req);
   
   // insert the data into the database
   const db_info = await PostDB.create(post_document);
+  var user_info = await UserDB.findOne({email: user});
+  var user_points_prev = user_info["points"] ;
+  var points = user_points_prev + 3;
+  var level = assign_badge.reassign(points);
+  const post_point_info = await UserDB.findOneAndUpdate({email: user}, {points: points, level: level});
+
+
   
   // tell the client it worked!
   res.redirect('/home/' + group + '/feed');
@@ -73,10 +82,11 @@ router.post('/:groupid/feed/:postid/reply', async (req, res) => {
         date: new Date().getTime(),
         message_content: req.body.reply,
         group: req.params.groupid,
-        parent_post: req.params.groupid
+        parent_post: req.params.postid
     };
     group = req.params.groupid;
     post = req.params.postid;
+    user = req.user.email;
 
     console.log(req.params.postid);
     
@@ -84,9 +94,12 @@ router.post('/:groupid/feed/:postid/reply', async (req, res) => {
     const reply_info = await ReplyDB.create(reply_document);
     replyid = reply_info.id;
     
-    //reply_id = await ReplyDB.find
     const post_info = await PostDB.findOneAndUpdate({_id: post}, {$push: {replies: reply_document}});
-    console.log(post_info);
+    var user_info = await UserDB.findOne({email: user});
+    var user_points_prev = user_info["points"] ;
+    var points = user_points_prev + 2;
+    var level = assign_badge.reassign(points);
+    const post_point_info = await UserDB.findOneAndUpdate({email: user}, {points: points, level: level});
 
     // tell the client it worked!
     res.redirect('/home/' + group + '/feed');

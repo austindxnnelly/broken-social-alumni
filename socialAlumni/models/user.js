@@ -8,7 +8,9 @@ const testusers = new mongoose.Schema({
     email: {type: String, required: true, unique: true},
     username: {type: String, required: true},
     phone_number: {type: Number, required: true},
-    profile_photo: {type: String, required: false}
+    profile_photo: {type: String, required: false},
+    points: {type: Number, required: false, default: 0},
+    level: {type: String, required: true, default: "zero"},
 });
 
 testusers.plugin(passportLocal, { usernameField: 'email' });

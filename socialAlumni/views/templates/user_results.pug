@@ -22,6 +22,7 @@ section(class='card')
         img(src=`/profilePictures/${user.profile_photo}`, alt="Profile pictures" height="500" width="500")
         div(class="card-title")
             p(lang="mi") #{user.first_name} #{user.last_name}
+                span(class=`badge ${user.level} rounded-pill` ) #{user.level}
     div(class="card-content")
         h2(class="card-title") 
         ul
