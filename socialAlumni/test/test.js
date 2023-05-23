@@ -16,6 +16,8 @@ const options = {
   useNewUrlParser: true,
 }
 
+
+
 //Test to make sure continous integration checking works
 test('My Test', (t) => {
   t.equal(1 + 1, 2, '1+1 should equal 2');
@@ -43,13 +45,20 @@ test('MongoDB Connection Test', async (t) => {
 });
 
 test('Retrieve objects from MongoDB', async (t) => {
-  const collection = db.collection('test.users'); // Replace with the name of your collection
+  const collection = require('../models/user'); // Replace with the name of your collection
+
+  mongoose.connect(db_url, options).then(() => {
+  }).catch((e) => {
+    console.error(e, 'could not connect!')
+  });
+  
 
   // Find objects matching a query
   const query = {first_name:'max'};
-  const objects = await collection.find(query).toArray();
+  const objects = await collection.find(query);
 
   t.ok(objects.length > 0, 'Objects should be retrieved from MongoDB');
+  mongoose.disconnect()
   t.end();
 });
 
