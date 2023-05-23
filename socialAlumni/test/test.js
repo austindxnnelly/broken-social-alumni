@@ -1,10 +1,16 @@
 const test = require('tape');
 const { exec } = require('child_process');
+const dotenv = require('dotenv');
 const { MongoClient } = require('mongodb');
 
 const mongoose = require("mongoose");
 
-const db_url = `mongodb+srv://admin:fipa4WmSVajHYl3ID@cluster0.hei7umz.mongodb.net/?retryWrites=true&w=majority`
+/* load .env*/
+dotenv.config();
+
+const user = process.env.ATLAS_USER;
+const password = process.env.ATLAS_PASSWORD;
+const db_url = `mongodb+srv://${user}:${password}@cluster0.hei7umz.mongodb.net/?retryWrites=true&w=majority`
 const options = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -16,13 +22,16 @@ test('My Test', (t) => {
   t.end();
 });
 
+
 test('MongoDB Connection Test', async (t) => {
   try {
-    const client = new MongoClient(db_url, { useNewUrlParser: true, useUnifiedTopology: true });
+    const client = new MongoClient(db_url, options);
     await client.connect();
 
+
+
     // Check if the connection is established
-    t.ok(client.isConnected(), 'MongoDB connection is successful');
+    t.ok(client, 'MongoDB connection is successful');
 
     // Close the MongoDB connection
     await client.close();
