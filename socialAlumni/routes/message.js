@@ -105,6 +105,9 @@ router.post('/:id/all-messages', async (req, res) => {
     };
     let reciever = req.params.id
 
+    if(message_document.message_content == ""){
+        res.redirect('/home/' + reciever + '/all-messages');
+    } else {
     console.log(req);
     
     // insert the data into the database
@@ -116,6 +119,7 @@ router.post('/:id/all-messages', async (req, res) => {
     // tell the client it worked!
     console.log('/' + reciever + '/all-messages');
     res.redirect('/home/' + reciever + '/all-messages');
+    }
 });
 
 router.get('/messages', async(req, res) => {
@@ -158,11 +162,18 @@ router.get('/messages', async(req, res) => {
     console.log(uniqueMessages);
     console.log(otherUsers);
 
-    console.log(uniqueMessages[0].username_sent)
+    //console.log(uniqueMessages[0].username_sent)
+
+    if(uniqueMessages[0] == undefined){
+            res.render('message_search', {isAuthenticated: true});
+    }else {
+
+
 
   
     res.redirect('/home/' + uniqueMessages[0].username_sent + '/all-messages');
     //, {messages: firstMessage, isAuthenticated: true, title: "Messages"});
+    }
   });
 
 
