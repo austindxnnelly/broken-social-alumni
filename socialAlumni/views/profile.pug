@@ -1,43 +1,47 @@
-extends layout 
+extends layout
 
-block content 
-    header(class="p-3 text-bg-dark d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom")
-        div(class="container")
-            include nav 
-    p 
-    div(class='row-profile')
-        legend Profile Settings
-        div(class='column-profile')
-           form(class="form-profile", method='get')
-                fieldset 
-                    label(for="profilePictures") Profile Picture 
-                    br
-                    img(src=`/profilePictures/${profilePictures}`, alt="Profile pictures")
-        div(class='column-profile')
-            form(class="form-profile", method='get')
-                fieldset 
-                    label(for="userFirstName") First Name 
-                    div
-                    label(for="firstName")  #{firstname}
-                    p
-                    div
-                    label(for="userSurname") Surname 
-                    div 
-                    label(for="lastName")  #{lastname}
-                    div
-                    p 
-                    label(for="userEmail") Email 
-                    div
-                    label #{email}
-        div(class='column-profile')
-            form(class="form-profile", method='get')
-                fieldset
-                    label(for="userStatus") Years Active 
-                    div
-                    input(type="status" id="userStatus" name="userStatus", class="form-control")
-                    div
-                    label(for="fieldOfStudy") Field of Study 
-                    div
-                    input(type="field" id="fieldOfStudy" name="fieldOfStudy", class="form-control")
-                    div
-                    input(type="submit", value="Save")
+block content
+  title Profile
+  link(href="/stylesheets/profle.css" rel="stylesheet")
+  header(class="p-3 text-bg-dark d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom")
+    div(class="container")
+      include nav 
+
+  .profile-section
+    legend Profile Settings
+
+    .row-profile
+      .column-profile
+        form(class="form-profile", method="get")
+          fieldset
+            label(for="profilePictures") Profile Picture
+            br
+            img(src=`/profilePictures/${profilePictures}`, alt="Profile picture")
+
+      .column-profile
+        form(class="form-profile", method="get")
+          fieldset
+            label(for="userFirstName") First Name
+            div
+              label(for="firstName") #{firstname}
+            p
+            label(for="userSurname") Surname
+            div
+              label(for="lastName") #{lastname}
+            p
+            label(for="userEmail") Email
+            div
+              label #{email}
+
+      .column-profile
+        form(class="form-profile", method="get")
+          fieldset
+            label(for="userStatus") Years Active
+            div
+              input(type="text" id="userStatus" name="userStatus", class="form-control")
+            p
+            label(for="fieldOfStudy") Field of Study
+            div
+              input(type="text" id="fieldOfStudy" name="fieldOfStudy", class="form-control")
+            p
+            input(type="submit", value="Save")
