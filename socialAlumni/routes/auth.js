@@ -40,12 +40,20 @@ router.post('/create', async (req, res) => {
 })
 
 router.get('/create', (req, res) => {
-  res.render('create', { title: 'Create Account' })
+  if (req.isAuthenticated()) {
+    res.redirect('profile');
+    /* If request is already authenticated, 
+    i.e. user has already logged in and 
+    there is no need to login again. */
+    console.log("SIGNED IN");
+  } else {
+    res.render('create', { title: 'Create Account' })
+  }
 })
 
 router.get('/signin', (req, res) => {
   if (req.isAuthenticated()) {
-  
+    res.redirect('profile');
     /* If request is already authenticated, 
     i.e. user has already logged in and 
     there is no need to login again. */
